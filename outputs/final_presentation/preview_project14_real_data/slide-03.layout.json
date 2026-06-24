@@ -1,0 +1,1007 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/j7mr93",
+    "id": "j7mr93",
+    "slide": 3,
+    "layoutId": "8a48fe74-b39b-4a49-bcaf-d2239ed69082",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F8FB",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "8a48fe74-b39b-4a49-bcaf-d2239ed69082",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "1",
+      "bbox": [
+        64,
+        42,
+        900,
+        58
+      ],
+      "geometry": "rect",
+      "text": "项目目标",
+      "textPreview": "项目目标",
+      "resolvedFontSize": 35,
+      "resolvedTextStyle": {
+        "fontSize": 35,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "项目目标"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "项目目标",
+          "resolvedTextStyle": {
+            "fontSize": 35,
+            "color": "#102033",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "项目目标",
+              "fontSize": 35,
+              "color": "#102033",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "2",
+      "bbox": [
+        64,
+        96,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "构建面向灾害应急救援的安全路径规划模型",
+      "textPreview": "构建面向灾害应急救援的安全路径规划模型",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "构建面向灾害应急救援的安全路径规划模型"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "构建面向灾害应急救援的安全路径规划模型",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "构建面向灾害应急救援的安全路径规划模型",
+              "fontSize": 18,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "3",
+      "bbox": [
+        64,
+        134,
+        1110,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E6ECF3",
+      "lineColor": "#E6ECF3",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "4",
+      "bbox": [
+        64,
+        684,
+        600,
+        24
+      ],
+      "geometry": "rect",
+      "text": "项目14 · 避开危险路段的救援路径规划  /  03",
+      "textPreview": "项目14 · 避开危险路段的救援路径规划  /  03",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#8A98AA",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "项目14 · 避开危险路段的救援路径规划  /  03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "项目14 · 避开危险路段的救援路径规划  /  03",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#8A98AA",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "项目14 · 避开危险路段的救援路径规划  /  03",
+              "fontSize": 13,
+              "color": "#8A98AA",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "5",
+      "bbox": [
+        92,
+        176,
+        500,
+        36
+      ],
+      "geometry": "rect",
+      "text": "输入数据",
+      "textPreview": "输入数据",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#1F5EFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "输入数据"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "输入数据",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#1F5EFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "输入数据",
+              "fontSize": 27,
+              "color": "#1F5EFF",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "6",
+      "bbox": [
+        96,
+        240,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1F5EFF",
+      "lineColor": "#1F5EFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "7",
+      "bbox": [
+        120,
+        232,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "真实区域道路网络",
+      "textPreview": "真实区域道路网络",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "真实区域道路网络"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "真实区域道路网络",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "真实区域道路网络",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "8",
+      "bbox": [
+        96,
+        286,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1F5EFF",
+      "lineColor": "#1F5EFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "9",
+      "bbox": [
+        120,
+        278,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "真实历史灾害事件",
+      "textPreview": "真实历史灾害事件",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "真实历史灾害事件"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "真实历史灾害事件",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "真实历史灾害事件",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cj6tovah",
+      "id": "10",
+      "bbox": [
+        96,
+        332,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1F5EFF",
+      "lineColor": "#1F5EFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/54zidony",
+      "id": "11",
+      "bbox": [
+        120,
+        324,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "起点、终点与灾害影响区",
+      "textPreview": "起点、终点与灾害影响区",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "起点、终点与灾害影响区"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "起点、终点与灾害影响区",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "起点、终点与灾害影响区",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/udg7adsj",
+      "id": "12",
+      "bbox": [
+        96,
+        378,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1F5EFF",
+      "lineColor": "#1F5EFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nyd0z610",
+      "id": "13",
+      "bbox": [
+        120,
+        370,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "道路距离、风险与拥堵属性",
+      "textPreview": "道路距离、风险与拥堵属性",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "道路距离、风险与拥堵属性"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "道路距离、风险与拥堵属性",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "道路距离、风险与拥堵属性",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cvixczed",
+      "id": "14",
+      "bbox": [
+        690,
+        176,
+        500,
+        36
+      ],
+      "geometry": "rect",
+      "text": "输出成果",
+      "textPreview": "输出成果",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#178A4A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "输出成果"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "输出成果",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#178A4A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "输出成果",
+              "fontSize": 27,
+              "color": "#178A4A",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5gbq1ory",
+      "id": "15",
+      "bbox": [
+        694,
+        240,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#178A4A",
+      "lineColor": "#178A4A",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/upwb2hwf",
+      "id": "16",
+      "bbox": [
+        718,
+        232,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "普通最短路径",
+      "textPreview": "普通最短路径",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "普通最短路径"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "普通最短路径",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "普通最短路径",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nap4r65w",
+      "id": "17",
+      "bbox": [
+        694,
+        286,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#178A4A",
+      "lineColor": "#178A4A",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c7u54zid",
+      "id": "18",
+      "bbox": [
+        718,
+        278,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "综合安全路径",
+      "textPreview": "综合安全路径",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "综合安全路径"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "综合安全路径",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "综合安全路径",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1orytsvu",
+      "id": "19",
+      "bbox": [
+        694,
+        332,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#178A4A",
+      "lineColor": "#178A4A",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5kb6xkf6",
+      "id": "20",
+      "bbox": [
+        718,
+        324,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "危险路段识别结果",
+      "textPreview": "危险路段识别结果",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "危险路段识别结果"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "危险路段识别结果",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "危险路段识别结果",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czed8v6p",
+      "id": "21",
+      "bbox": [
+        694,
+        378,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#178A4A",
+      "lineColor": "#178A4A",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "22",
+      "bbox": [
+        718,
+        370,
+        446,
+        36
+      ],
+      "geometry": "rect",
+      "text": "路径对比表和可视化图",
+      "textPreview": "路径对比表和可视化图",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "fontSize": 21,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "路径对比表和可视化图"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "路径对比表和可视化图",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "路径对比表和可视化图",
+              "fontSize": 21,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

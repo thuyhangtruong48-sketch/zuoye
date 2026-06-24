@@ -1,0 +1,17 @@
+edge_id,from,to,distance,danger_type,congestion,passable,safe_weight
+R01,A,B,2.3,normal,0.1,True,2.438
+R02,B,C,2.0,flood,0.2,True,4.928
+R03,C,D,2.0,collapse,0.1,True,8.48
+R04,D,I,2.3,normal,0.1,True,2.438
+R05,A,E,3.2,normal,0.05,True,3.296
+R06,E,F,2.2,normal,0.1,True,2.332
+R07,F,G,2.2,normal,0.1,True,2.332
+R08,G,H,2.2,normal,0.1,True,2.332
+R09,H,I,3.2,normal,0.05,True,3.296
+R10,B,F,2.4,congestion,0.7,True,4.771
+R11,C,G,2.4,flood,0.3,True,6.23
+R12,D,H,2.4,congestion,0.6,True,4.57
+R13,A,J,4.0,congestion,0.9,True,8.624
+R14,J,I,5.2,congestion,0.9,True,11.211
+R15,E,C,3.0,collapse,0.4,False,14.88
+R16,F,D,3.0,congestion,0.8,True,6.216

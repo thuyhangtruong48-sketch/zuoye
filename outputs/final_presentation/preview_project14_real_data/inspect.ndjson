@@ -1,0 +1,219 @@
+{"kind":"layout","layoutId":"507d91c7-17fb-43a5-bfac-5060b682d14e","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"8a48fe74-b39b-4a49-bcaf-d2239ed69082","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/i8va6y","slide":1,"title":"避开危险路段的救援路径规划","textShapes":11}
+{"kind":"textbox","id":"sh/x4nap4r6","slide":1,"text":"避开危险路段的救援路径规划","textPreview":"避开危险路段的救援路径规划","textChars":13,"textLines":1,"bbox":[82,150,900,76]}
+{"kind":"textbox","id":"sh/qd4vmtwr","slide":1,"text":"真实道路网络 + 历史灾害数据 + Dijkstra 安全路径","textPreview":"真实道路网络 + 历史灾害数据 + Dijkstra 安全路径","textChars":31,"textLines":1,"bbox":[86,246,860,42]}
+{"kind":"textbox","id":"sh/fyxobm58","slide":1,"text":"模块3：应急响应","textPreview":"模块3：应急响应","textChars":8,"textLines":1,"bbox":[88,342,340,34]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":1,"text":"地震 · 洪水 · 火灾 三类救援场景","textPreview":"地震 · 洪水 · 火灾 三类救援场景","textChars":19,"textLines":1,"bbox":[88,390,560,30]}
+{"kind":"textbox","id":"sh/qpg3ex0n","slide":1,"text":"道路节点最多","textPreview":"道路节点最多","textChars":6,"textLines":1,"bbox":[798,184,190,24]}
+{"kind":"textbox","id":"sh/fa9w3m94","slide":1,"text":"568070","textPreview":"568070","textChars":6,"textLines":1,"bbox":[798,210,200,34]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":1,"text":"道路边最多","textPreview":"道路边最多","textChars":5,"textLines":1,"bbox":[798,294,190,24]}
+{"kind":"textbox","id":"sh/pg3ex0nu","slide":1,"text":"596062","textPreview":"596062","textChars":6,"textLines":1,"bbox":[798,320,200,34]}
+{"kind":"textbox","id":"sh/7adsji5s","slide":1,"text":"算法","textPreview":"算法","textChars":2,"textLines":1,"bbox":[798,404,190,24]}
+{"kind":"textbox","id":"sh/epkzupwb","slide":1,"text":"Dijkstra","textPreview":"Dijkstra","textChars":8,"textLines":1,"bbox":[798,430,200,34]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":1,"text":"项目14 · 避开危险路段的救援路径规划  /  01","textPreview":"项目14 · 避开危险路段的救援路径规划  /  01","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"notes","id":"nt/i8va6y","slide":1,"text":"各位老师同学好，我们汇报的项目是避开危险路段的救援路径规划。这个项目属于应急响应模块，核心目标是在灾害发生后，为救援车辆规划一条比普通最短路更安全、更适合通行的路线。\n\n项目不是使用手动画的模拟路网，而是结合真实道路网络和真实历史灾害事件，把地震、洪水、火灾影响转换为道路风险权重，再用 Dijkstra 算法计算普通最短路径和安全路径。"}
+{"kind":"slide","id":"sl/qf2csn","slide":2,"title":"项目背景","textShapes":7}
+{"kind":"textbox","id":"sh/1032lszq","slide":2,"text":"项目背景","textPreview":"项目背景","textChars":4,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/u9knih4b","slide":2,"text":"灾害救援场景中，最短路线不一定是最适合路线","textPreview":"灾害救援场景中，最短路线不一定是最适合路线","textChars":21,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/c7u54zid","slide":2,"text":"项目14 · 避开危险路段的救援路径规划  /  02","textPreview":"项目14 · 避开危险路段的救援路径规划  /  02","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/u18jqh0f","slide":2,"text":"地震后可能出现塌方、滑坡、道路中断","textPreview":"地震后可能出现塌方、滑坡、道路中断","textChars":17,"textLines":1,"bbox":[144,190,876,36]}
+{"kind":"textbox","id":"sh/cvixczed","slide":2,"text":"暴雨内涝后道路积水、通行能力下降","textPreview":"暴雨内涝后道路积水、通行能力下降","textChars":16,"textLines":1,"bbox":[144,248,876,36]}
+{"kind":"textbox","id":"sh/18jqh0fe","slide":2,"text":"城市火灾救援受火场影响区和道路拥堵制约","textPreview":"城市火灾救援受火场影响区和道路拥堵制约","textChars":19,"textLines":1,"bbox":[144,306,876,36]}
+{"kind":"textbox","id":"sh/j2t83itg","slide":2,"text":"救援车辆需要综合考虑距离、安全性和通行效率","textPreview":"救援车辆需要综合考虑距离、安全性和通行效率","textChars":21,"textLines":1,"bbox":[144,364,876,36]}
+{"kind":"notes","id":"nt/qf2csn","slide":2,"text":"传统导航系统通常以距离最短或时间最短作为目标，但在灾害救援中，这个目标并不总是合理。例如地震后山区道路可能发生塌方，暴雨后城区可能出现积水，火灾周边道路可能拥堵或管制。\n\n因此救援路径规划不能只看短不短，还要看能不能安全通行。本项目就是在这个背景下，把道路风险引入路径规划。"}
+{"kind":"slide","id":"sl/j7mr93","slide":3,"title":"项目目标","textShapes":13}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":3,"text":"项目目标","textPreview":"项目目标","textChars":4,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":3,"text":"构建面向灾害应急救援的安全路径规划模型","textPreview":"构建面向灾害应急救援的安全路径规划模型","textChars":19,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":3,"text":"项目14 · 避开危险路段的救援路径规划  /  03","textPreview":"项目14 · 避开危险路段的救援路径规划  /  03","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":3,"text":"输入数据","textPreview":"输入数据","textChars":4,"textLines":1,"bbox":[92,176,500,36]}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":3,"text":"真实区域道路网络","textPreview":"真实区域道路网络","textChars":8,"textLines":1,"bbox":[120,232,446,36]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":3,"text":"真实历史灾害事件","textPreview":"真实历史灾害事件","textChars":8,"textLines":1,"bbox":[120,278,446,36]}
+{"kind":"textbox","id":"sh/54zidony","slide":3,"text":"起点、终点与灾害影响区","textPreview":"起点、终点与灾害影响区","textChars":11,"textLines":1,"bbox":[120,324,446,36]}
+{"kind":"textbox","id":"sh/nyd0z610","slide":3,"text":"道路距离、风险与拥堵属性","textPreview":"道路距离、风险与拥堵属性","textChars":12,"textLines":1,"bbox":[120,370,446,36]}
+{"kind":"textbox","id":"sh/cvixczed","slide":3,"text":"输出成果","textPreview":"输出成果","textChars":4,"textLines":1,"bbox":[690,176,500,36]}
+{"kind":"textbox","id":"sh/upwb2hwf","slide":3,"text":"普通最短路径","textPreview":"普通最短路径","textChars":6,"textLines":1,"bbox":[718,232,446,36]}
+{"kind":"textbox","id":"sh/c7u54zid","slide":3,"text":"综合安全路径","textPreview":"综合安全路径","textChars":6,"textLines":1,"bbox":[718,278,446,36]}
+{"kind":"textbox","id":"sh/5kb6xkf6","slide":3,"text":"危险路段识别结果","textPreview":"危险路段识别结果","textChars":8,"textLines":1,"bbox":[718,324,446,36]}
+{"kind":"textbox","id":"sh/neloj2t8","slide":3,"text":"路径对比表和可视化图","textPreview":"路径对比表和可视化图","textChars":10,"textLines":1,"bbox":[718,370,446,36]}
+{"kind":"notes","id":"nt/j7mr93","slide":3,"text":"项目目标可以概括为三件事：第一，构建真实道路网络；第二，把历史灾害影响区映射到道路边上；第三，用 Dijkstra 算法分别计算普通最短路径和安全路径。\n\n最终输出包括路径结果、危险路段识别结果、对比指标，以及适合汇报展示的路线图。"}
+{"kind":"slide","id":"sl/0wqiy7","slide":4,"title":"总体技术路线","textShapes":16}
+{"kind":"textbox","id":"sh/bq1oryts","slide":4,"text":"总体技术路线","textPreview":"总体技术路线","textChars":6,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/4byhgn29","slide":4,"text":"从真实数据到安全救援路径的完整流程","textPreview":"从真实数据到安全救援路径的完整流程","textChars":17,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/mhk3q5o7","slide":4,"text":"项目14 · 避开危险路段的救援路径规划  /  04","textPreview":"项目14 · 避开危险路段的救援路径规划  /  04","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/4nap4r65","slide":4,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[106,282,30,30]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":4,"text":"道路数据获取","textPreview":"道路数据获取","textChars":6,"textLines":1,"bbox":[106,316,132,42]}
+{"kind":"textbox","id":"sh/ji5snelo","slide":4,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[304,282,30,30]}
+{"kind":"textbox","id":"sh/uxc3ylc7","slide":4,"text":"灾害数据整理","textPreview":"灾害数据整理","textChars":6,"textLines":1,"bbox":[304,316,132,42]}
+{"kind":"textbox","id":"sh/j6tovaho","slide":4,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[502,282,30,30]}
+{"kind":"textbox","id":"sh/ulwval87","slide":4,"text":"空间叠加","textPreview":"空间叠加","textChars":4,"textLines":1,"bbox":[502,316,132,42]}
+{"kind":"textbox","id":"sh/j2t83itg","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[700,282,30,30]}
+{"kind":"textbox","id":"sh/qh0fepkz","slide":4,"text":"权重计算","textPreview":"权重计算","textChars":4,"textLines":1,"bbox":[700,316,132,42]}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":4,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[898,282,30,30]}
+{"kind":"textbox","id":"sh/pwb2hwfy","slide":4,"text":"Dijkstra","textPreview":"Dijkstra","textChars":8,"textLines":1,"bbox":[898,316,132,42]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":4,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1096,282,30,30]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":4,"text":"结果可视化","textPreview":"结果可视化","textChars":5,"textLines":1,"bbox":[1096,316,132,42]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":4,"text":"核心逻辑：真实道路网络中的每一条道路边，都根据灾害影响和拥堵情况重新计算综合代价。","textPreview":"核心逻辑：真实道路网络中的每一条道路边，都根据灾害影响和拥堵情况重新计算综合代价。","textChars":41,"textLines":1,"bbox":[130,430,980,46]}
+{"kind":"notes","id":"nt/0wqiy7","slide":4,"text":"技术路线从数据开始。首先获取真实道路网络，然后整理历史灾害事件的位置和影响范围。接着进行空间叠加，判断哪些道路落入灾害影响区。\n\n完成风险标注后，给每条道路边计算综合权重。最后使用 Dijkstra 算法搜索路径，并把普通路径和安全路径做可视化对比。"}
+{"kind":"slide","id":"sl/x5j3qs","slide":5,"title":"真实数据来源","textShapes":8}
+{"kind":"textbox","id":"sh/yhgn29gr","slide":5,"text":"真实数据来源","textPreview":"真实数据来源","textChars":6,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/58z25kb6","slide":5,"text":"道路、灾害与交通状态均来自公开或可调用数据源","textPreview":"道路、灾害与交通状态均来自公开或可调用数据源","textChars":22,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":5,"text":"项目14 · 避开危险路段的救援路径规划  /  05","textPreview":"项目14 · 避开危险路段的救援路径规划  /  05","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":5,"text":"OpenStreetMap / Overpass API：区域连续道路网络","textPreview":"OpenStreetMap / Overpass API：区域连续道路网络","textChars":37,"textLines":1,"bbox":[139,180,956,36]}
+{"kind":"textbox","id":"sh/nqxs72x4","slide":5,"text":"高德 Web 服务：路线数据与上海火灾场景交通状态","textPreview":"高德 Web 服务：路线数据与上海火灾场景交通状态","textChars":25,"textLines":1,"bbox":[139,230,956,36]}
+{"kind":"textbox","id":"sh/cbulwval","slide":5,"text":"USGS：2008 汶川地震事件资料","textPreview":"USGS：2008 汶川地震事件资料","textChars":18,"textLines":1,"bbox":[139,280,956,36]}
+{"kind":"textbox","id":"sh/u54zidon","slide":5,"text":"中国气象数据网与公开记录：北京 7·21 暴雨内涝","textPreview":"中国气象数据网与公开记录：北京 7·21 暴雨内涝","textChars":25,"textLines":1,"bbox":[139,330,956,36]}
+{"kind":"textbox","id":"sh/czed8v6p","slide":5,"text":"公开历史资料：上海胶州路 11·15 火灾","textPreview":"公开历史资料：上海胶州路 11·15 火灾","textChars":21,"textLines":1,"bbox":[139,380,956,36]}
+{"kind":"notes","id":"nt/x5j3qs","slide":5,"text":"数据来源是这个项目比较重要的一点。道路方面，我们使用 OSM/Overpass 抓取连续区域路网，也保留了高德路线和交通状态数据。灾害方面，地震使用 USGS 和公开历史资料，洪水使用中国气象数据网及北京 7·21 暴雨公开记录，火灾使用上海胶州路火灾公开资料。\n\n需要说明的是，公开灾害资料通常难以精确到每条道路，所以我们采用灾害影响区缓冲分析，将真实灾害事件映射到道路网络。"}
+{"kind":"slide","id":"sl/k21uz3","slide":6,"title":"道路网络建模","textShapes":14}
+{"kind":"textbox","id":"sh/yd0z6103","slide":6,"text":"道路网络建模","textPreview":"道路网络建模","textChars":6,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":6,"text":"将真实道路抽象成图结构 Graph","textPreview":"将真实道路抽象成图结构 Graph","textChars":17,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":6,"text":"项目14 · 避开危险路段的救援路径规划  /  06","textPreview":"项目14 · 避开危险路段的救援路径规划  /  06","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":6,"text":"图结构","textPreview":"图结构","textChars":3,"textLines":1,"bbox":[92,176,500,36]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":6,"text":"节点：路口、道路折点、起点和终点","textPreview":"节点：路口、道路折点、起点和终点","textChars":16,"textLines":1,"bbox":[120,232,446,36]}
+{"kind":"textbox","id":"sh/yxobm58z","slide":6,"text":"边：相邻节点之间的真实道路段","textPreview":"边：相邻节点之间的真实道路段","textChars":14,"textLines":1,"bbox":[120,278,446,36]}
+{"kind":"textbox","id":"sh/hwfyxobm","slide":6,"text":"无向图：道路默认双向可通行","textPreview":"无向图：道路默认双向可通行","textChars":13,"textLines":1,"bbox":[120,324,446,36]}
+{"kind":"textbox","id":"sh/zqtcj6to","slide":6,"text":"背景道路和计算道路分开管理","textPreview":"背景道路和计算道路分开管理","textChars":13,"textLines":1,"bbox":[120,370,446,36]}
+{"kind":"textbox","id":"sh/oza1gvy9","slide":6,"text":"道路边属性","textPreview":"道路边属性","textChars":5,"textLines":1,"bbox":[690,176,500,36]}
+{"kind":"textbox","id":"sh/6xkf6dcb","slide":6,"text":"距离 distance","textPreview":"距离 distance","textChars":11,"textLines":1,"bbox":[718,232,446,36]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":6,"text":"危险类型 danger_type","textPreview":"危险类型 danger_type","textChars":16,"textLines":1,"bbox":[718,278,446,36]}
+{"kind":"textbox","id":"sh/5gbq1ory","slide":6,"text":"拥堵程度 congestion","textPreview":"拥堵程度 congestion","textChars":15,"textLines":1,"bbox":[718,324,446,36]}
+{"kind":"textbox","id":"sh/nap4r65w","slide":6,"text":"是否可通行 passable","textPreview":"是否可通行 passable","textChars":14,"textLines":1,"bbox":[718,370,446,36]}
+{"kind":"textbox","id":"sh/54zidony","slide":6,"text":"综合安全权重 safe_weight","textPreview":"综合安全权重 safe_weight","textChars":18,"textLines":1,"bbox":[718,416,446,36]}
+{"kind":"notes","id":"nt/k21uz3","slide":6,"text":"在算法中，道路网络被抽象成图结构。图中的节点代表路口、道路折点、救援起点和灾害终点；图中的边代表两点之间的一段道路。\n\n每条边都保存距离、危险类型、拥堵程度、是否可通行和综合安全权重。这样 Dijkstra 算法就可以在图上进行搜索。"}
+{"kind":"slide","id":"sl/8l2ak5","slide":7,"title":"灾害影响区映射","textShapes":14}
+{"kind":"textbox","id":"sh/dg7adsji","slide":7,"text":"灾害影响区映射","textPreview":"灾害影响区映射","textChars":7,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/6tovahoz","slide":7,"text":"不是手动指定危险路段，而是由空间叠加得到","textPreview":"不是手动指定危险路段，而是由空间叠加得到","textChars":20,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/onyd0z61","slide":7,"text":"项目14 · 避开危险路段的救援路径规划  /  07","textPreview":"项目14 · 避开危险路段的救援路径规划  /  07","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/6hcrmhk3","slide":7,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[106,282,30,30]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":7,"text":"历史灾害点","textPreview":"历史灾害点","textChars":5,"textLines":1,"bbox":[106,316,132,42]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":7,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[304,282,30,30]}
+{"kind":"textbox","id":"sh/sji5snel","slide":7,"text":"影响半径/区域","textPreview":"影响半径/区域","textChars":7,"textLines":1,"bbox":[304,316,132,42]}
+{"kind":"textbox","id":"sh/lszqtcj6","slide":7,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[502,282,30,30]}
+{"kind":"textbox","id":"sh/s72x4nap","slide":7,"text":"道路相交判断","textPreview":"道路相交判断","textChars":6,"textLines":1,"bbox":[502,316,132,42]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":7,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[700,282,30,30]}
+{"kind":"textbox","id":"sh/s36hcrmh","slide":7,"text":"标记风险边","textPreview":"标记风险边","textChars":5,"textLines":1,"bbox":[700,316,132,42]}
+{"kind":"textbox","id":"sh/mtwra5gb","slide":7,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[898,282,30,30]}
+{"kind":"textbox","id":"sh/fepkzupw","slide":7,"text":"进入权重计算","textPreview":"进入权重计算","textChars":6,"textLines":1,"bbox":[898,316,132,42]}
+{"kind":"textbox","id":"sh/4r65wjud","slide":7,"text":"说明：具体到“某条路当时一定受损”的逐路段官方数据较难公开获取，因此项目采用课程级 GIS 缓冲区推导方法。","textPreview":"说明：具体到“某条路当时一定受损”的逐路段官方数据较难公开获取，因此项目采用课程级 GIS 缓冲区推导方法。","textChars":54,"textLines":1,"bbox":[116,440,1020,70]}
+{"kind":"notes","id":"nt/8l2ak5","slide":7,"text":"灾害映射方法是本项目的关键。我们不是手工说某条路危险，而是先确定真实历史灾害点或影响区域，再建立影响缓冲区。\n\n随后把道路折线与灾害影响区做空间叠加，如果道路进入影响区，就标记为塌方、积水或火灾风险。这样风险路段是由数据和规则推导出来的，而不是主观指定。"}
+{"kind":"slide","id":"sl/zl2ukh","slide":8,"title":"权重设计","textShapes":13}
+{"kind":"textbox","id":"sh/idonyd0z","slide":8,"text":"权重设计","textPreview":"权重设计","textChars":4,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/t47y1kre","slide":8,"text":"安全路径的目标不是最短距离，而是综合代价最低","textPreview":"安全路径的目标不是最短距离，而是综合代价最低","textChars":22,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/b6xkf6dc","slide":8,"text":"项目14 · 避开危险路段的救援路径规划  /  08","textPreview":"项目14 · 避开危险路段的救援路径规划  /  08","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/il0rqd4v","slide":8,"text":"综合权重 = 道路距离 × 灾害风险系数 × 拥堵修正系数 + 特殊风险附加代价","textPreview":"综合权重 = 道路距离 × 灾害风险系数 × 拥堵修正系数 + 特殊风险附加代价","textChars":40,"textLines":1,"bbox":[104,180,1030,48]}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":8,"text":"正常道路","textPreview":"正常道路","textChars":4,"textLines":1,"bbox":[130,306,190,24]}
+{"kind":"textbox","id":"sh/bi9s36hc","slide":8,"text":"1.0","textPreview":"1.0","textChars":3,"textLines":1,"bbox":[130,332,200,34]}
+{"kind":"textbox","id":"sh/s72x4nap","slide":8,"text":"积水道路","textPreview":"积水道路","textChars":4,"textLines":1,"bbox":[400,306,190,24]}
+{"kind":"textbox","id":"sh/lszqtcj6","slide":8,"text":"2.2","textPreview":"2.2","textChars":3,"textLines":1,"bbox":[400,332,200,34]}
+{"kind":"textbox","id":"sh/3m94fu18","slide":8,"text":"塌方风险","textPreview":"塌方风险","textChars":4,"textLines":1,"bbox":[670,306,190,24]}
+{"kind":"textbox","id":"sh/sji5snel","slide":8,"text":"4-8","textPreview":"4-8","textChars":3,"textLines":1,"bbox":[670,332,200,34]}
+{"kind":"textbox","id":"sh/adsji5sn","slide":8,"text":"火灾影响","textPreview":"火灾影响","textChars":4,"textLines":1,"bbox":[940,306,190,24]}
+{"kind":"textbox","id":"sh/3ylc7u54","slide":8,"text":"9.0","textPreview":"9.0","textChars":3,"textLines":1,"bbox":[940,332,200,34]}
+{"kind":"textbox","id":"sh/svu9knih","slide":8,"text":"风险系数越高，Dijkstra 在搜索安全路径时越倾向于绕开该道路。","textPreview":"风险系数越高，Dijkstra 在搜索安全路径时越倾向于绕开该道路。","textChars":34,"textLines":1,"bbox":[180,460,900,40]}
+{"kind":"notes","id":"nt/zl2ukh","slide":8,"text":"普通最短路径只使用道路距离作为权重，而安全路径使用综合权重。综合权重由道路距离、灾害风险系数、拥堵修正和特殊附加代价构成。\n\n比如正常道路系数为 1，积水道路系数更高，塌方和火灾影响道路代价更高。这样算法自然会避开高风险路段。"}
+{"kind":"slide","id":"sl/677pwk","slide":9,"title":"Dijkstra 算法","textShapes":8}
+{"kind":"textbox","id":"sh/szqtcj6t","slide":9,"text":"Dijkstra 算法","textPreview":"Dijkstra 算法","textChars":11,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/3ex0nuxc","slide":9,"text":"非负权重图中的最小代价路径搜索方法","textPreview":"非负权重图中的最小代价路径搜索方法","textChars":17,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":9,"text":"项目14 · 避开危险路段的救援路径规划  /  09","textPreview":"项目14 · 避开危险路段的救援路径规划  /  09","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":9,"text":"从起点开始，记录到每个节点的当前最小代价","textPreview":"从起点开始，记录到每个节点的当前最小代价","textChars":20,"textLines":1,"bbox":[149,180,916,36]}
+{"kind":"textbox","id":"sh/lwval87e","slide":9,"text":"每次选择当前代价最小、尚未确定的节点","textPreview":"每次选择当前代价最小、尚未确定的节点","textChars":18,"textLines":1,"bbox":[149,238,916,36]}
+{"kind":"textbox","id":"sh/2lszqtcj","slide":9,"text":"用该节点更新相邻节点的路径代价","textPreview":"用该节点更新相邻节点的路径代价","textChars":15,"textLines":1,"bbox":[149,296,916,36]}
+{"kind":"textbox","id":"sh/knih4byh","slide":9,"text":"直到到达终点，得到总代价最小路径","textPreview":"直到到达终点，得到总代价最小路径","textChars":16,"textLines":1,"bbox":[149,354,916,36]}
+{"kind":"textbox","id":"sh/d8bat47y","slide":9,"text":"本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 → 安全救援路径。","textPreview":"本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 → 安全救援路径。","textChars":45,"textLines":1,"bbox":[134,480,960,60]}
+{"kind":"notes","id":"nt/677pwk","slide":9,"text":"Dijkstra 算法适合解决非负权重图中的最短路径问题。它从起点出发，每次扩展当前总代价最小的节点，并不断更新到其他节点的最小代价。\n\n本项目中我们使用同一个算法运行两次。第一次边权是道路距离，得到普通最短路径；第二次边权是综合安全权重，得到更适合救援的安全路径。"}
+{"kind":"slide","id":"sl/26r2po","slide":10,"title":"地震场景：2008 汶川地震","textShapes":11}
+{"kind":"textbox","id":"sh/pkzupwb2","slide":10,"text":"地震场景：2008 汶川地震","textPreview":"地震场景：2008 汶川地震","textChars":14,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":10,"text":"成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险","textPreview":"成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险","textChars":27,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":10,"text":"项目14 · 避开危险路段的救援路径规划  /  10","textPreview":"项目14 · 避开危险路段的救援路径规划  /  10","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/72x4nap4","slide":10,"text":"节点","textPreview":"节点","textChars":2,"textLines":1,"bbox":[890,182,190,24]}
+{"kind":"textbox","id":"sh/wjudg7ad","slide":10,"text":"568070","textPreview":"568070","textChars":6,"textLines":1,"bbox":[890,208,200,34]}
+{"kind":"textbox","id":"sh/lwval87e","slide":10,"text":"道路边","textPreview":"道路边","textChars":3,"textLines":1,"bbox":[890,282,190,24]}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":10,"text":"596062","textPreview":"596062","textChars":6,"textLines":1,"bbox":[890,308,200,34]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":10,"text":"风险边","textPreview":"风险边","textChars":3,"textLines":1,"bbox":[890,382,190,24]}
+{"kind":"textbox","id":"sh/loj2t83i","slide":10,"text":"25123","textPreview":"25123","textChars":5,"textLines":1,"bbox":[890,408,200,34]}
+{"kind":"textbox","id":"sh/3itgfmlk","slide":10,"text":"安全路径","textPreview":"安全路径","textChars":4,"textLines":1,"bbox":[890,482,190,24]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":10,"text":"208.451 km","textPreview":"208.451 km","textChars":10,"textLines":1,"bbox":[890,508,200,34]}
+{"kind":"image","id":"im/wval87ed","slide":10,"name":"","geometry":"roundRect","alt":"四川汶川地震救援路径图","bbox":[54,152,780,455]}
+{"kind":"notes","id":"nt/26r2po","slide":10,"text":"第一组实验是地震场景。我们选择 2008 年汶川地震作为真实历史事件，路线从成都城区到汶川县城。这个场景的特点是山区道路较多，地震后容易出现滑坡、塌方和道路中断。\n\n图中蓝色是普通最短路径，绿色是安全路径，红色区域表示历史地震影响区。可以看到普通最短路径距离更短，但会穿过塌方风险区；安全路径距离增加，但避开了主要风险区。"}
+{"kind":"slide","id":"sl/isjyqx","slide":11,"title":"洪水场景：北京 7·21 暴雨内涝","textShapes":11}
+{"kind":"textbox","id":"sh/il0rqd4v","slide":11,"text":"洪水场景：北京 7·21 暴雨内涝","textPreview":"洪水场景：北京 7·21 暴雨内涝","textChars":17,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/tcj6tova","slide":11,"text":"清华大学 → 北京朝阳站，重点考虑积水与通行能力下降","textPreview":"清华大学 → 北京朝阳站，重点考虑积水与通行能力下降","textChars":26,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/byhgn29g","slide":11,"text":"项目14 · 避开危险路段的救援路径规划  /  11","textPreview":"项目14 · 避开危险路段的救援路径规划  /  11","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":11,"text":"节点","textPreview":"节点","textChars":2,"textLines":1,"bbox":[890,182,190,24]}
+{"kind":"textbox","id":"sh/bulwval8","slide":11,"text":"49603","textPreview":"49603","textChars":5,"textLines":1,"bbox":[890,208,200,34]}
+{"kind":"textbox","id":"sh/0fepkzup","slide":11,"text":"道路边","textPreview":"道路边","textChars":3,"textLines":1,"bbox":[890,282,190,24]}
+{"kind":"textbox","id":"sh/p0bi9s36","slide":11,"text":"55430","textPreview":"55430","textChars":5,"textLines":1,"bbox":[890,308,200,34]}
+{"kind":"textbox","id":"sh/bulwval8","slide":11,"text":"积水边","textPreview":"积水边","textChars":3,"textLines":1,"bbox":[890,382,190,24]}
+{"kind":"textbox","id":"sh/032lszqt","slide":11,"text":"6607","textPreview":"6607","textChars":4,"textLines":1,"bbox":[890,408,200,34]}
+{"kind":"textbox","id":"sh/ixczed8v","slide":11,"text":"安全路径","textPreview":"安全路径","textChars":4,"textLines":1,"bbox":[890,482,190,24]}
+{"kind":"textbox","id":"sh/bi9s36hc","slide":11,"text":"22.725 km","textPreview":"22.725 km","textChars":9,"textLines":1,"bbox":[890,508,200,34]}
+{"kind":"image","id":"im/3ylc7u54","slide":11,"name":"","geometry":"roundRect","alt":"北京洪水救援路径图","bbox":[54,152,780,455]}
+{"kind":"notes","id":"nt/isjyqx","slide":11,"text":"第二组实验是洪水内涝场景。我们选择 2012 年北京 7·21 特大暴雨作为历史事件，路线从清华大学到北京朝阳站。\n\n图中的蓝色半透明区域表示代表性的内涝影响区。普通最短路径距离为 19.905 公里，但经过积水风险路段；安全路径为 22.725 公里，距离略长，但危险边数量降为 0，更适合救援车辆通行。"}
+{"kind":"slide","id":"sl/9azq7q","slide":12,"title":"火灾场景：上海胶州路火灾","textShapes":11}
+{"kind":"textbox","id":"sh/z61032ls","slide":12,"text":"火灾场景：上海胶州路火灾","textPreview":"火灾场景：上海胶州路火灾","textChars":12,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":12,"text":"消防站 → 火灾点，重点考虑火场影响区与城市拥堵","textPreview":"消防站 → 火灾点，重点考虑火场影响区与城市拥堵","textChars":24,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/a9w3m94f","slide":12,"text":"项目14 · 避开危险路段的救援路径规划  /  12","textPreview":"项目14 · 避开危险路段的救援路径规划  /  12","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/h0fepkzu","slide":12,"text":"节点","textPreview":"节点","textChars":2,"textLines":1,"bbox":[890,182,190,24]}
+{"kind":"textbox","id":"sh/65wjudg7","slide":12,"text":"17644","textPreview":"17644","textChars":5,"textLines":1,"bbox":[890,208,200,34]}
+{"kind":"textbox","id":"sh/zupwb2hw","slide":12,"text":"道路边","textPreview":"道路边","textChars":3,"textLines":1,"bbox":[890,282,190,24]}
+{"kind":"textbox","id":"sh/a9w3m94f","slide":12,"text":"19502","textPreview":"19502","textChars":5,"textLines":1,"bbox":[890,308,200,34]}
+{"kind":"textbox","id":"sh/sfil0rqd","slide":12,"text":"拥堵匹配","textPreview":"拥堵匹配","textChars":4,"textLines":1,"bbox":[890,382,190,24]}
+{"kind":"textbox","id":"sh/z61032ls","slide":12,"text":"6272","textPreview":"6272","textChars":4,"textLines":1,"bbox":[890,408,200,34]}
+{"kind":"textbox","id":"sh/hcrmhk3q","slide":12,"text":"安全路径","textPreview":"安全路径","textChars":4,"textLines":1,"bbox":[890,482,190,24]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":12,"text":"3.725 km","textPreview":"3.725 km","textChars":8,"textLines":1,"bbox":[890,508,200,34]}
+{"kind":"image","id":"im/y1kre1w7","slide":12,"name":"","geometry":"roundRect","alt":"上海火灾救援路径图","bbox":[54,152,780,455]}
+{"kind":"notes","id":"nt/9azq7q","slide":12,"text":"第三组实验是城市火灾场景。我们选择 2010 年上海胶州路火灾，起点为武宁消防站，终点为胶州路 728 号火灾点。\n\n这个场景除了火场影响区，还引入高德交通状态进行拥堵匹配。普通路径距离只有 2.001 公里，但会经过更多火灾影响边；安全路径距离为 3.725 公里，虽然更长，但减少了火灾风险路段，并综合考虑拥堵因素。"}
+{"kind":"slide","id":"sl/xndfkw","slide":13,"title":"实验结果对比","textShapes":24}
+{"kind":"textbox","id":"sh/0bi9s36h","slide":13,"text":"实验结果对比","textPreview":"实验结果对比","textChars":6,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/7qpg3ex0","slide":13,"text":"安全路径通常更长，但危险路段显著减少","textPreview":"安全路径通常更长，但危险路段显著减少","textChars":18,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/p4r65wju","slide":13,"text":"项目14 · 避开危险路段的救援路径规划  /  13","textPreview":"项目14 · 避开危险路段的救援路径规划  /  13","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/7y1kre1w","slide":13,"text":"场景","textPreview":"场景","textChars":2,"textLines":1,"bbox":[100,203,160,30]}
+{"kind":"textbox","id":"sh/p8nqxs72","slide":13,"text":"普通路径","textPreview":"普通路径","textChars":4,"textLines":1,"bbox":[280,203,210,30]}
+{"kind":"textbox","id":"sh/ih4byhgn","slide":13,"text":"普通危险边","textPreview":"普通危险边","textChars":5,"textLines":1,"bbox":[510,203,160,30]}
+{"kind":"textbox","id":"sh/0nuxc3yl","slide":13,"text":"安全路径","textPreview":"安全路径","textChars":4,"textLines":1,"bbox":[690,203,210,30]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":13,"text":"安全危险边","textPreview":"安全危险边","textChars":5,"textLines":1,"bbox":[920,203,160,30]}
+{"kind":"textbox","id":"sh/0z61032l","slide":13,"text":"汶川地震","textPreview":"汶川地震","textChars":4,"textLines":1,"bbox":[100,261,160,30]}
+{"kind":"textbox","id":"sh/i5sneloj","slide":13,"text":"156.684 km","textPreview":"156.684 km","textChars":10,"textLines":1,"bbox":[280,261,210,30]}
+{"kind":"textbox","id":"sh/zqtcj6to","slide":13,"text":"816","textPreview":"816","textChars":3,"textLines":1,"bbox":[510,261,160,30]}
+{"kind":"textbox","id":"sh/hwfyxobm","slide":13,"text":"208.451 km","textPreview":"208.451 km","textChars":10,"textLines":1,"bbox":[690,261,210,30]}
+{"kind":"textbox","id":"sh/zed8v6ps","slide":13,"text":"0","textPreview":"0","textChars":1,"textLines":1,"bbox":[920,261,160,30]}
+{"kind":"textbox","id":"sh/hk3q5o7q","slide":13,"text":"北京洪水","textPreview":"北京洪水","textChars":4,"textLines":1,"bbox":[100,319,160,30]}
+{"kind":"textbox","id":"sh/z61032ls","slide":13,"text":"19.905 km","textPreview":"19.905 km","textChars":9,"textLines":1,"bbox":[280,319,210,30]}
+{"kind":"textbox","id":"sh/032lszqt","slide":13,"text":"77","textPreview":"77","textChars":2,"textLines":1,"bbox":[510,319,160,30]}
+{"kind":"textbox","id":"sh/ixczed8v","slide":13,"text":"22.725 km","textPreview":"22.725 km","textChars":9,"textLines":1,"bbox":[690,319,210,30]}
+{"kind":"textbox","id":"sh/0fepkzup","slide":13,"text":"0","textPreview":"0","textChars":1,"textLines":1,"bbox":[920,319,160,30]}
+{"kind":"textbox","id":"sh/i9s36hcr","slide":13,"text":"上海火灾","textPreview":"上海火灾","textChars":4,"textLines":1,"bbox":[100,377,160,30]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":13,"text":"2.001 km","textPreview":"2.001 km","textChars":8,"textLines":1,"bbox":[280,377,210,30]}
+{"kind":"textbox","id":"sh/5sneloj2","slide":13,"text":"14","textPreview":"14","textChars":2,"textLines":1,"bbox":[510,377,160,30]}
+{"kind":"textbox","id":"sh/nqxs72x4","slide":13,"text":"3.725 km","textPreview":"3.725 km","textChars":8,"textLines":1,"bbox":[690,377,210,30]}
+{"kind":"textbox","id":"sh/5kb6xkf6","slide":13,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[920,377,160,30]}
+{"kind":"textbox","id":"sh/czed8v6p","slide":13,"text":"结论：安全路径不是简单追求更短，而是让救援车辆尽量避开高风险区域。","textPreview":"结论：安全路径不是简单追求更短，而是让救援车辆尽量避开高风险区域。","textChars":33,"textLines":1,"bbox":[126,470,980,44]}
+{"kind":"notes","id":"nt/xndfkw","slide":13,"text":"这一页汇总三组实验结果。可以看到，在地震和洪水场景中，普通最短路径都经过大量危险边，而安全路径将危险边降为 0。\n\n火灾场景中，由于终点本身就在火灾影响区附近，完全避开风险不现实，但安全路径仍减少了火灾影响边，并引入了拥堵因素。这说明安全路径规划的目标不是距离最短，而是综合代价最低。"}
+{"kind":"slide","id":"sl/k53lab","slide":14,"title":"项目特点与不足","textShapes":15}
+{"kind":"textbox","id":"sh/at47y1kr","slide":14,"text":"项目特点与不足","textPreview":"项目特点与不足","textChars":7,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/lkjm1cfa","slide":14,"text":"真实数据驱动，但仍属于课程级灾害影响建模","textPreview":"真实数据驱动，但仍属于课程级灾害影响建模","textChars":20,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":14,"text":"项目14 · 避开危险路段的救援路径规划  /  14","textPreview":"项目14 · 避开危险路段的救援路径规划  /  14","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":14,"text":"项目特点","textPreview":"项目特点","textChars":4,"textLines":1,"bbox":[92,176,500,36]}
+{"kind":"textbox","id":"sh/sneloj2t","slide":14,"text":"真实道路网络，不是手画路网","textPreview":"真实道路网络，不是手画路网","textChars":13,"textLines":1,"bbox":[120,232,446,36]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":14,"text":"真实历史灾害事件作为背景","textPreview":"真实历史灾害事件作为背景","textChars":12,"textLines":1,"bbox":[120,278,446,36]}
+{"kind":"textbox","id":"sh/xs72x4na","slide":14,"text":"空间叠加自动识别危险边","textPreview":"空间叠加自动识别危险边","textChars":11,"textLines":1,"bbox":[120,324,446,36]}
+{"kind":"textbox","id":"sh/fmlkjm1c","slide":14,"text":"Dijkstra 同时支持普通路径和安全路径","textPreview":"Dijkstra 同时支持普通路径和安全路径","textChars":22,"textLines":1,"bbox":[120,370,446,36]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":14,"text":"三类灾害场景覆盖较完整","textPreview":"三类灾害场景覆盖较完整","textChars":11,"textLines":1,"bbox":[120,416,446,36]}
+{"kind":"textbox","id":"sh/qtcj6tov","slide":14,"text":"不足与改进","textPreview":"不足与改进","textChars":5,"textLines":1,"bbox":[690,176,500,36]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":14,"text":"公开资料难以精确到逐路段损毁","textPreview":"公开资料难以精确到逐路段损毁","textChars":14,"textLines":1,"bbox":[718,232,446,36]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":14,"text":"灾害影响区采用缓冲区近似","textPreview":"灾害影响区采用缓冲区近似","textChars":12,"textLines":1,"bbox":[718,278,446,36]}
+{"kind":"textbox","id":"sh/zidonyd0","slide":14,"text":"可继续接入实时封路和救援车辆约束","textPreview":"可继续接入实时封路和救援车辆约束","textChars":16,"textLines":1,"bbox":[718,324,446,36]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":14,"text":"后续可使用更专业 GIS 面数据","textPreview":"后续可使用更专业 GIS 面数据","textChars":16,"textLines":1,"bbox":[718,370,446,36]}
+{"kind":"textbox","id":"sh/za1gvy90","slide":14,"text":"可加入实时交通监测更新","textPreview":"可加入实时交通监测更新","textChars":11,"textLines":1,"bbox":[718,416,446,36]}
+{"kind":"notes","id":"nt/k53lab","slide":14,"text":"项目的优点是数据来源较真实，模型流程完整，能够展示灾害风险对路径选择的影响。尤其是使用 OSM 区域道路网后，路线不是孤立的一条线，而是在真实路网中搜索得到。\n\n同时也要说明不足。由于公开灾害资料很难提供逐路段损毁记录，所以我们使用缓冲区叠加方法进行风险推导。后续如果能接入官方道路封闭数据、实时灾情或更精细的 GIS 面数据，模型会更接近实际应用。"}
+{"kind":"slide","id":"sl/q42ejx","slide":15,"title":"总结","textShapes":8}
+{"kind":"textbox","id":"sh/8nqxs72x","slide":15,"text":"总结","textPreview":"总结","textChars":2,"textLines":1,"bbox":[64,42,900,58]}
+{"kind":"textbox","id":"sh/j2t83itg","slide":15,"text":"救援路径规划应从“最短”转向“安全且可通行”","textPreview":"救援路径规划应从“最短”转向“安全且可通行”","textChars":22,"textLines":1,"bbox":[64,96,1040,34]}
+{"kind":"textbox","id":"sh/1w7mp0bi","slide":15,"text":"项目14 · 避开危险路段的救援路径规划  /  15","textPreview":"项目14 · 避开危险路段的救援路径规划  /  15","textChars":27,"textLines":1,"bbox":[64,684,600,24]}
+{"kind":"textbox","id":"sh/jqh0fepk","slide":15,"text":"完成真实道路网络与历史灾害数据融合","textPreview":"完成真实道路网络与历史灾害数据融合","textChars":17,"textLines":1,"bbox":[154,190,906,36]}
+{"kind":"textbox","id":"sh/1kre1w7m","slide":15,"text":"实现基于 Dijkstra 的普通路径与安全路径计算","textPreview":"实现基于 Dijkstra 的普通路径与安全路径计算","textChars":26,"textLines":1,"bbox":[154,252,906,36]}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":15,"text":"通过空间叠加把灾害影响转换为道路风险权重","textPreview":"通过空间叠加把灾害影响转换为道路风险权重","textChars":20,"textLines":1,"bbox":[154,314,906,36]}
+{"kind":"textbox","id":"sh/s36hcrmh","slide":15,"text":"实验表明：安全路径可能更长，但更适合灾害救援","textPreview":"实验表明：安全路径可能更长，但更适合灾害救援","textChars":22,"textLines":1,"bbox":[154,376,906,36]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":15,"text":"谢谢聆听","textPreview":"谢谢聆听","textChars":4,"textLines":1,"bbox":[0,552,1280,60]}
+{"kind":"notes","id":"nt/q42ejx","slide":15,"text":"最后总结一下，本项目围绕灾害应急救援中的路径规划问题，构建了真实道路网络、历史灾害影响区和 Dijkstra 路径搜索模型。\n\n实验结果说明，在灾害救援中不能只依赖最短路径。安全路径虽然可能距离更长，但能够减少高风险路段，更符合应急救援需求。我的汇报到这里结束，谢谢大家。"}

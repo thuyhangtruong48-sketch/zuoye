@@ -1,0 +1,856 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/26r2po",
+    "id": "26r2po",
+    "slide": 10,
+    "layoutId": "8a48fe74-b39b-4a49-bcaf-d2239ed69082",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F8FB",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "8a48fe74-b39b-4a49-bcaf-d2239ed69082",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pkzupwb2",
+      "id": "1",
+      "bbox": [
+        64,
+        42,
+        900,
+        58
+      ],
+      "geometry": "rect",
+      "text": "地震场景：2008 汶川地震",
+      "textPreview": "地震场景：2008 汶川地震",
+      "resolvedFontSize": 35,
+      "resolvedTextStyle": {
+        "fontSize": 35,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "地震场景：2008 汶川地震"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "地震场景：2008 汶川地震",
+          "resolvedTextStyle": {
+            "fontSize": 35,
+            "color": "#102033",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "地震场景：2008 汶川地震",
+              "fontSize": 35,
+              "color": "#102033",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/itgfmlkj",
+      "id": "2",
+      "bbox": [
+        64,
+        96,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险",
+      "textPreview": "成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "成都城区 → 汶川县城，重点考虑山区塌方与道路中断风险",
+              "fontSize": 18,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7ed8bat4",
+      "id": "3",
+      "bbox": [
+        64,
+        134,
+        1110,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E6ECF3",
+      "lineColor": "#E6ECF3",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nuxc3yl",
+      "id": "4",
+      "bbox": [
+        64,
+        684,
+        600,
+        24
+      ],
+      "geometry": "rect",
+      "text": "项目14 · 避开危险路段的救援路径规划  /  10",
+      "textPreview": "项目14 · 避开危险路段的救援路径规划  /  10",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#8A98AA",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "项目14 · 避开危险路段的救援路径规划  /  10"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "项目14 · 避开危险路段的救援路径规划  /  10",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#8A98AA",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "项目14 · 避开危险路段的救援路径规划  /  10",
+              "fontSize": 13,
+              "color": "#8A98AA",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/wval87ed",
+      "id": "5",
+      "bbox": [
+        54,
+        152,
+        780,
+        455
+      ],
+      "geometry": "roundRect",
+      "alt": "四川汶川地震救援路径图",
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "imageMask": {
+        "geometry": "roundRect",
+        "adjustmentList": [
+          {
+            "name": "adj",
+            "formula": "val 1758"
+          }
+        ]
+      },
+      "asset": {
+        "assetId": "1850bb12-0001-4ea2-b3bd-302e93c9a206",
+        "contentType": "image/png",
+        "byteLength": 345586
+      }
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ih4byhgn",
+      "id": "6",
+      "bbox": [
+        872,
+        168,
+        230,
+        86
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9E2EC",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/72x4nap4",
+      "id": "7",
+      "bbox": [
+        890,
+        182,
+        190,
+        24
+      ],
+      "geometry": "rect",
+      "text": "节点",
+      "textPreview": "节点",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "节点"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "节点",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "节点",
+              "fontSize": 16,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wjudg7ad",
+      "id": "8",
+      "bbox": [
+        890,
+        208,
+        200,
+        34
+      ],
+      "geometry": "rect",
+      "text": "568070",
+      "textPreview": "568070",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "+mn-lt",
+        "color": "#1F5EFF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "568070"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "568070",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#1F5EFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "568070",
+              "fontSize": 26,
+              "color": "#1F5EFF",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p4r65wju",
+      "id": "9",
+      "bbox": [
+        872,
+        268,
+        230,
+        86
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9E2EC",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "10",
+      "bbox": [
+        890,
+        282,
+        190,
+        24
+      ],
+      "geometry": "rect",
+      "text": "道路边",
+      "textPreview": "道路边",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "道路边"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "道路边",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "道路边",
+              "fontSize": 16,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "11",
+      "bbox": [
+        890,
+        308,
+        200,
+        34
+      ],
+      "geometry": "rect",
+      "text": "596062",
+      "textPreview": "596062",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "+mn-lt",
+        "color": "#178A4A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "596062"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "596062",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#178A4A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "596062",
+              "fontSize": 26,
+              "color": "#178A4A",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3q5o7qpg",
+      "id": "12",
+      "bbox": [
+        872,
+        368,
+        230,
+        86
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9E2EC",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e9cvixcz",
+      "id": "13",
+      "bbox": [
+        890,
+        382,
+        190,
+        24
+      ],
+      "geometry": "rect",
+      "text": "风险边",
+      "textPreview": "风险边",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "风险边"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "风险边",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "风险边",
+              "fontSize": 16,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "14",
+      "bbox": [
+        890,
+        408,
+        200,
+        34
+      ],
+      "geometry": "rect",
+      "text": "25123",
+      "textPreview": "25123",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "+mn-lt",
+        "color": "#D64545",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "25123"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "25123",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#D64545",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "25123",
+              "fontSize": 26,
+              "color": "#D64545",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "15",
+      "bbox": [
+        872,
+        468,
+        230,
+        86
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#D9E2EC",
+      "lineWidth": 1
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "16",
+      "bbox": [
+        890,
+        482,
+        190,
+        24
+      ],
+      "geometry": "rect",
+      "text": "安全路径",
+      "textPreview": "安全路径",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "安全路径"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "安全路径",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "安全路径",
+              "fontSize": 16,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "17",
+      "bbox": [
+        890,
+        508,
+        200,
+        34
+      ],
+      "geometry": "rect",
+      "text": "208.451 km",
+      "textPreview": "208.451 km",
+      "resolvedFontSize": 26,
+      "resolvedTextStyle": {
+        "fontSize": 26,
+        "typeface": "+mn-lt",
+        "color": "#178A4A",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "208.451 km"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "208.451 km",
+          "resolvedTextStyle": {
+            "fontSize": 26,
+            "color": "#178A4A",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "208.451 km",
+              "fontSize": 26,
+              "color": "#178A4A",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,640 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/677pwk",
+    "id": "677pwk",
+    "slide": 9,
+    "layoutId": "8a48fe74-b39b-4a49-bcaf-d2239ed69082",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#F6F8FB",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "8a48fe74-b39b-4a49-bcaf-d2239ed69082",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "507d91c7-17fb-43a5-bfac-5060b682d14e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "1",
+      "bbox": [
+        64,
+        42,
+        900,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Dijkstra 算法",
+      "textPreview": "Dijkstra 算法",
+      "resolvedFontSize": 35,
+      "resolvedTextStyle": {
+        "fontSize": 35,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Dijkstra 算法"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Dijkstra 算法",
+          "resolvedTextStyle": {
+            "fontSize": 35,
+            "color": "#102033",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Dijkstra 算法",
+              "fontSize": 35,
+              "color": "#102033",
+              "bold": true,
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "2",
+      "bbox": [
+        64,
+        96,
+        1040,
+        34
+      ],
+      "geometry": "rect",
+      "text": "非负权重图中的最小代价路径搜索方法",
+      "textPreview": "非负权重图中的最小代价路径搜索方法",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#5D6B80",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "非负权重图中的最小代价路径搜索方法"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "非负权重图中的最小代价路径搜索方法",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#5D6B80",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "非负权重图中的最小代价路径搜索方法",
+              "fontSize": 18,
+              "color": "#5D6B80",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at47y1kr",
+      "id": "3",
+      "bbox": [
+        64,
+        134,
+        1110,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E6ECF3",
+      "lineColor": "#E6ECF3",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "4",
+      "bbox": [
+        64,
+        684,
+        600,
+        24
+      ],
+      "geometry": "rect",
+      "text": "项目14 · 避开危险路段的救援路径规划  /  09",
+      "textPreview": "项目14 · 避开危险路段的救援路径规划  /  09",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#8A98AA",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "项目14 · 避开危险路段的救援路径规划  /  09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "项目14 · 避开危险路段的救援路径规划  /  09",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#8A98AA",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "项目14 · 避开危险路段的救援路径规划  /  09",
+              "fontSize": 13,
+              "color": "#8A98AA",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "5",
+      "bbox": [
+        125,
+        188,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#1F5EFF",
+      "lineColor": "#1F5EFF",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "6",
+      "bbox": [
+        149,
+        180,
+        916,
+        36
+      ],
+      "geometry": "rect",
+      "text": "从起点开始，记录到每个节点的当前最小代价",
+      "textPreview": "从起点开始，记录到每个节点的当前最小代价",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "从起点开始，记录到每个节点的当前最小代价"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "从起点开始，记录到每个节点的当前最小代价",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "从起点开始，记录到每个节点的当前最小代价",
+              "fontSize": 25,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ahoza1gv",
+      "id": "7",
+      "bbox": [
+        125,
+        246,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#178A4A",
+      "lineColor": "#178A4A",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "8",
+      "bbox": [
+        149,
+        238,
+        916,
+        36
+      ],
+      "geometry": "rect",
+      "text": "每次选择当前代价最小、尚未确定的节点",
+      "textPreview": "每次选择当前代价最小、尚未确定的节点",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "每次选择当前代价最小、尚未确定的节点"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "每次选择当前代价最小、尚未确定的节点",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "每次选择当前代价最小、尚未确定的节点",
+              "fontSize": 25,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "9",
+      "bbox": [
+        125,
+        304,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#E58B25",
+      "lineColor": "#E58B25",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "10",
+      "bbox": [
+        149,
+        296,
+        916,
+        36
+      ],
+      "geometry": "rect",
+      "text": "用该节点更新相邻节点的路径代价",
+      "textPreview": "用该节点更新相邻节点的路径代价",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用该节点更新相邻节点的路径代价"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用该节点更新相邻节点的路径代价",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "用该节点更新相邻节点的路径代价",
+              "fontSize": 25,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "11",
+      "bbox": [
+        125,
+        362,
+        9,
+        9
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#D64545",
+      "lineColor": "#D64545",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knih4byh",
+      "id": "12",
+      "bbox": [
+        149,
+        354,
+        916,
+        36
+      ],
+      "geometry": "rect",
+      "text": "直到到达终点，得到总代价最小路径",
+      "textPreview": "直到到达终点，得到总代价最小路径",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "直到到达终点，得到总代价最小路径"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "直到到达终点，得到总代价最小路径",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#102033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "直到到达终点，得到总代价最小路径",
+              "fontSize": 25,
+              "color": "#102033",
+              "alignment": "left"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "13",
+      "bbox": [
+        134,
+        480,
+        960,
+        60
+      ],
+      "geometry": "rect",
+      "text": "本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 → 安全救援路径。",
+      "textPreview": "本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 → 安全救援路径。",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#102033",
+        "bold": true,
+        "alignment": "center",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 →"
+          },
+          {
+            "index": 2,
+            "text": "安全救援路径。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 → 安全救援路径。",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#102033",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "本项目运行两次 Dijkstra：距离权重 → 普通最短路径；安全权重 → 安全救援路径。",
+              "fontSize": 27,
+              "color": "#102033",
+              "bold": true,
+              "alignment": "center"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
