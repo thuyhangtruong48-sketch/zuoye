@@ -1225,7 +1225,61 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
                      scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
 
     def _draw_safe_path_step(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
-        """步骤 6：底图 + 灾害区 + 危险边 + 最短路径 + 安全路径（绿色）。"""
+        """步骤 6：只突出绿色安全路径，蓝色最短路径用淡虚线参考。"""
+        _draw_danger_edges_step(img, _d)
+        d2 = ImageDraw.Draw(img)
+        is_attached = is_osm_scene or scenario_label in {"地震场景", "洪水场景"}
+
+        # 淡化的蓝色最短路径（半透明虚线参考）
+        if len(shortest_path) >= 2:
+            short_pts = route_points(nodes, lookup, shortest_path)
+            if is_attached:
+                draw_geo_line(
+                    d2, short_pts, project,
+                    (31, 94, 255, 90), 1,
+                    smooth=0, image=img, antialias=True, casing_extra=2,
+                )
+            else:
+                draw_geo_line(
+                    d2, short_pts, project,
+                    (31, 94, 255, 70), 2,
+                    smooth=1, image=img, antialias=True, casing_extra=4,
+                )
+
+        # 突出的绿色安全路径
+        safe_w = 7 if is_attached else 10
+        safe_casing = "#2D7A44" if is_attached else "#FFFFFF"
+        ce = 6 if is_attached else 10
+        draw_geo_line(
+            d2, route_points(nodes, lookup, safe_path), project,
+            "#178A4A", safe_w, safe_casing, smooth=0 if is_attached else 4,
+            image=img, antialias=True, casing_extra=ce,
+        )
+
+        d3 = ImageDraw.Draw(img)
+        draw_markers(d3, nodes, safe_path or shortest_path, project,
+                     scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
+
+        # 在右下角加公式信息框
+        box_x = WIDTH - RIGHT - 280
+        box_y = HEIGHT - BOTTOM - 140
+        info_font = load_font(20)
+        small_font = load_font(17)
+        d3.rounded_rectangle(
+            (box_x, box_y, WIDTH - RIGHT + 180, HEIGHT - BOTTOM - 10),
+            radius=14, fill="#F0FDF4", outline="#86EFAC", width=2,
+        )
+        d3.text((box_x + 16, box_y + 12), "安全权重 Dijkstra", font=load_font(22, bold=True), fill="#166534")
+        lines = [
+            "安全权重 = 距离 × 灾害风险系数",
+            "          × 拥堵修正系数",
+            "Dijkstra 选择综合代价最低路径",
+        ]
+        for i, line in enumerate(lines):
+            d3.text((box_x + 16, box_y + 48 + i * 24), line, font=small_font if i < 2 else info_font, fill="#14532D")
+
+    def _draw_final_overview(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
+        """步骤 7：最终完整对比图，含双路径 + 图例 + 对比数据。"""
         _draw_danger_edges_step(img, _d)
         d2 = ImageDraw.Draw(img)
         is_attached = is_osm_scene or scenario_label in {"地震场景", "洪水场景"}
@@ -1233,34 +1287,62 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
         sw = 3 if is_attached else 7
         rs = 0 if is_attached else 4
         ce = 3 if is_attached else 8
-        # 最短路径
+
+        # 蓝色最短路径
         draw_geo_line(
             d2, route_points(nodes, lookup, shortest_path), project,
             "#1F5EFF", sw, casing, smooth=rs, image=img, antialias=True, casing_extra=ce,
         )
-        # 安全路径
+        # 绿色安全路径
         safe_w = 4 if is_attached else 8
         draw_geo_line(
             d2, route_points(nodes, lookup, safe_path), project,
             "#178A4A", safe_w, casing, smooth=rs, image=img, antialias=True, casing_extra=ce,
         )
+
         d3 = ImageDraw.Draw(img)
         draw_markers(d3, nodes, safe_path or shortest_path, project,
                      scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
 
-    def _draw_final_overview(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
-        """步骤 7：完整大图——等同于最终 render_scene 的完整输出。"""
-        # 复用完整渲染
-        pass
+        # 添加对比信息小面板
+        dist_result = results.get("distance", {})
+        safe_result = results.get("safe", {})
+        panel_x = WIDTH - RIGHT + 35
+        panel_y = TOP + 30
+        panel_w = 310
+        panel_h = 220
+        d3.rounded_rectangle(
+            (panel_x, panel_y, panel_x + panel_w, panel_y + panel_h),
+            radius=14, fill="#FFFFFF", outline="#D9E2EC", width=2,
+        )
+        d3.text((panel_x + 14, panel_y + 10), "路径对比", font=load_font(26, bold=True), fill="#102033")
+
+        rows = [
+            ("普通最短路径", f"{dist_result.get('total_distance', '-')} km", "#1F5EFF"),
+            ("安全路径", f"{safe_result.get('total_distance', '-')} km", "#178A4A"),
+            ("综合代价", f"{safe_result.get('total_cost', '-')}", "#178A4A"),
+            ("危险类型", ", ".join(safe_result.get("danger_types", []) or []), "#E58B25"),
+        ]
+        small_f = load_font(19)
+        for j, (label, value, color) in enumerate(rows):
+            y = panel_y + 52 + j * 34
+            d3.text((panel_x + 14, y), label, font=small_f, fill="#64748B")
+            d3.text((panel_x + panel_w - 14, y), str(value), font=small_f, fill=color, anchor="ra")
+
+        d3.text(
+            (panel_x + 14, panel_y + panel_h - 26),
+            "Dijkstra 完整对比结果",
+            font=load_font(16), fill="#94A3B8",
+        )
 
     steps: list[tuple[str, Callable[[Image.Image, ImageDraw.ImageDraw], None]]] = [
         ("加载道路底图", _draw_background_roads),
         ("叠加灾害影响区", _draw_disaster_zones_step),
-        ("读取交通态势数据", _draw_danger_edges_step),  # 步骤 3 和步骤 4 视觉上一起展示危险边
-        ("标记危险/拥堵路段", _draw_danger_edges_step),  # 步骤 4
+        ("读取交通态势数据", _draw_danger_edges_step),
+        ("标记危险/拥堵路段", _draw_danger_edges_step),
         ("Dijkstra · 普通最短路径", _draw_shortest_path_step),
         ("Dijkstra · 安全救援路径", _draw_safe_path_step),
-        ("输出对比表与完成", _draw_safe_path_step),  # 步骤 7 直接显示完整双路径
+        ("路径对比与最终结果", _draw_final_overview),
     ]
 
     out_paths: list[str] = []
@@ -1272,15 +1354,6 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
             rel = ""
         out_paths.append(rel)
         print(f"[pipeline] step {i}/7: {step_title} -> {rel}")
-
-    # 步骤 7 直接复用最终的 route_map_abstract.png（完整图）
-    # 确保完整图已存在
-    full_map = render_scene(data_dir, output_dir, scenario_label)
-    try:
-        step7_rel = full_map.resolve().relative_to(ROOT.resolve()).as_posix()
-    except ValueError:
-        step7_rel = ""
-    out_paths[6] = step7_rel  # 替换步骤 7 为完整图
 
     return out_paths
 
