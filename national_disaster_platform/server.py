@@ -189,6 +189,7 @@ def run_recalculate(sid: str) -> dict:
 
     # 步骤 3: 生成 7 张流水线步骤图
     logs.append("[真实运行] 步骤 3/3: 生成 7 张流水线阶段图")
+    step_failed = False
     try:
         step_proc = subprocess.run(
             [
@@ -204,11 +205,21 @@ def run_recalculate(sid: str) -> dict:
         logs.append(step_proc.stdout)
         if step_proc.stderr:
             logs.append(step_proc.stderr)
+        if step_proc.returncode != 0:
+            step_failed = True
+            logs.append(f"[警告] 流水线步骤图生成失败 (exit code: {step_proc.returncode})")
+    except subprocess.TimeoutExpired:
+        step_failed = True
+        logs.append("[警告] 流水线步骤图生成超时")
     except Exception as exc:
-        logs.append(f"流水线步骤图生成失败: {exc}")
+        step_failed = True
+        logs.append(f"[警告] 流水线步骤图生成异常: {exc}")
 
     elapsed = round(time.time() - started, 2)
-    logs.append(f"[完成] 真实流水线执行完成，共耗时 {elapsed} 秒")
+    if step_failed:
+        logs.append(f"[完成] Dijkstra 和路线图已完成，但步骤图生成失败 (共耗时 {elapsed} 秒)")
+    else:
+        logs.append(f"[完成] 真实流水线执行完成，共耗时 {elapsed} 秒")
     return {"ok": True, "logs": logs, "elapsed": elapsed}
 
 
