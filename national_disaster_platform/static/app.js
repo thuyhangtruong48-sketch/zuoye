@@ -255,9 +255,8 @@ async function runRealPipeline() {
   // 刷新当前场景数据
   const refreshed = await fetch(`/api/scenarios/${currentId}`).then((res) => res.json());
   scenarios = scenarios.map((item) => (item.id === currentId ? refreshed : item));
-  demoPlayedSteps = -1;
-  currentStepIndex = -1;
-  renderScene(refreshed);
+  demoPlayedSteps = 6;
+  renderPipeline(refreshed.pipeline, 6);
 
   $("logBox").textContent = [
     `[真实运行] 流水线执行完成，用时 ${payload.elapsed || 0} 秒`,
@@ -265,7 +264,14 @@ async function runRealPipeline() {
     "---",
     ...(payload.logs || []),
   ].join("\n");
-  updateStageOverlay("真实运行完成", "下方为重新生成的结果，可按步骤查看或播放快速演示。");
+
+  // 直接显示第 7 步图片
+  const stepPaths = refreshed.pipelineSteps || [];
+  if (stepPaths[6]) {
+    jumpToStep(6, refreshed, stepPaths);
+  } else {
+    renderScene(refreshed);
+  }
 
   $("demoBtn").disabled = false;
   $("runPipelineBtn").disabled = false;

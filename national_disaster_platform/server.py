@@ -231,19 +231,23 @@ def ensure_pipeline_steps(sid: str) -> list[str]:
     data_dir = config["data_dir"]
     output_dir = config["output_dir"]
     steps: list[str] = []
-    for i in range(1, 7):
-        # 步骤 1-6 名为 pipeline_step_{i}.png，步骤 7 直接复用最终图
+    for i in range(1, 8):
         step_file = output_dir / f"pipeline_step_{i}.png"
         try:
-            steps.append(step_file.resolve().relative_to(ROOT.resolve()).as_posix())
+            if step_file.exists():
+                steps.append(step_file.resolve().relative_to(ROOT.resolve()).as_posix())
+            else:
+                steps.append("")
         except ValueError:
             steps.append("")
-    # 步骤 7 复用 route_map_abstract.png
-    final = output_dir / "route_map_abstract.png"
-    try:
-        steps.append(final.resolve().relative_to(ROOT.resolve()).as_posix())
-    except ValueError:
-        steps.append("")
+    # 如果 pipeline_step_7.png 不存在，回退到 route_map_abstract.png
+    if not steps[6]:
+        final = output_dir / "route_map_abstract.png"
+        try:
+            if final.exists():
+                steps[6] = final.resolve().relative_to(ROOT.resolve()).as_posix()
+        except ValueError:
+            pass
     return steps
 
 
