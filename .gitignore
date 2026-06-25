@@ -1,9 +1,9 @@
-__pycache__/
 *.py[cod]
+*.log
+__pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-*.log
 .venv/
 .claude/
 data/demo_*_pipeline/
