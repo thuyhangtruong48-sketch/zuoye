@@ -30,6 +30,7 @@ SCENARIOS = {
         "output_dir": ROOT / "outputs" / "osm_sichuan_earthquake",
         "marker": {"x": 43, "y": 58},
         "pipeline_label": "四川地震场景",
+        "pipeline_config": ROOT / "configs" / "osm_disaster_pipeline.sichuan_earthquake.json",
         "summary": "以成都到汶川救援为例，叠加 2008 年汶川地震影响区，识别塌方/中断风险路段。",
     },
     "beijing_flood": {
@@ -47,6 +48,7 @@ SCENARIOS = {
         "output_dir": ROOT / "outputs" / "osm_beijing_flood",
         "marker": {"x": 72, "y": 32},
         "pipeline_label": "洪水OSM路网场景",
+        "pipeline_config": None,
         "summary": "以北京城区洪涝应急通行为例，叠加历史暴雨影响区和高德实时拥堵数据。",
     },
     "shanghai_fire": {
@@ -64,6 +66,7 @@ SCENARIOS = {
         "output_dir": ROOT / "outputs" / "osm_shanghai_fire",
         "marker": {"x": 76, "y": 52},
         "pipeline_label": "上海火灾OSM路网场景",
+        "pipeline_config": ROOT / "configs" / "osm_disaster_pipeline.shanghai_fire.json",
         "summary": "以消防站到火灾点救援为例，叠加真实火灾位置、火场缓冲区和高德交通态势。",
     },
 }
@@ -99,7 +102,7 @@ def scenario_payload(sid: str) -> dict:
     image = output_dir / "route_map_abstract.png"
     return {
         "id": sid,
-        **{k: v for k, v in config.items() if k not in {"data_dir", "output_dir"}},
+        **{k: v for k, v in config.items() if k not in {"data_dir", "output_dir", "pipeline_config", "pipeline_label"}},
         "stats": {
             "nodes": len(nodes),
             "edges": len(edges),
@@ -137,42 +140,68 @@ def quote_rel(path: Path) -> str:
 
 
 def run_recalculate(sid: str) -> dict:
+    """真实运行模式：调用本地脚本重新执行 Dijkstra 和可视化。"""
     config = SCENARIOS[sid]
     data_dir = config["data_dir"]
     output_dir = config["output_dir"]
+    pipeline_config = config.get("pipeline_config")
     python = ROOT / ".venv" / "Scripts" / "python.exe"
     if not python.exists():
         python = Path(sys.executable)
 
     started = time.time()
-    commands = [
-        [
-            str(python),
-            str(ROOT / "src" / "rescue_planner.py"),
-            "--data-dir",
-            str(data_dir),
-            "--output-dir",
-            str(output_dir),
-        ],
-        [
-            str(python),
-            "-c",
-            (
-                "from pathlib import Path; "
-                "from tools.create_abstract_route_maps import render_scene; "
-                f"render_scene(Path(r'{data_dir}'), Path(r'{output_dir}'), '{config['title']}')"
-            ),
-        ],
-    ]
     logs: list[str] = []
-    for command in commands:
-        proc = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, timeout=180)
+
+    # 如果有完整流水线配置，走 run_osm_disaster_pipeline.py --skip-fetch
+    if pipeline_config and pipeline_config.exists():
+        logs.append("[真实运行] 检测到完整流水线配置，使用 --skip-fetch 模式")
+        proc = subprocess.run(
+            [
+                str(python), str(ROOT / "tools" / "run_osm_disaster_pipeline.py"),
+                "--config", str(pipeline_config),
+                "--skip-fetch", "--overwrite",
+            ],
+            cwd=ROOT, text=True, capture_output=True, timeout=300,
+        )
         logs.append(proc.stdout)
         if proc.stderr:
             logs.append(proc.stderr)
         if proc.returncode != 0:
             return {"ok": False, "logs": logs, "elapsed": round(time.time() - started, 2)}
-    # 同步生成流水线步骤图
+    else:
+        # 没有完整配置的场景：至少重新跑 Dijkstra
+        logs.append("[真实运行] 无流水线配置，直接运行 Dijkstra 和可视化")
+        # 1. Dijkstra
+        proc = subprocess.run(
+            [
+                str(python), str(ROOT / "src" / "rescue_planner.py"),
+                "--data-dir", str(data_dir), "--output-dir", str(output_dir),
+            ],
+            cwd=ROOT, text=True, capture_output=True, timeout=180,
+        )
+        logs.append(proc.stdout)
+        if proc.stderr:
+            logs.append(proc.stderr)
+        if proc.returncode != 0:
+            return {"ok": False, "logs": logs, "elapsed": round(time.time() - started, 2)}
+        # 2. 渲染完整图
+        proc = subprocess.run(
+            [
+                str(python), "-c",
+                (
+                    "from pathlib import Path; "
+                    "from tools.create_abstract_route_maps import render_scene; "
+                    f"render_scene(Path(r'{data_dir}'), Path(r'{output_dir}'), '{config['title']}')"
+                ),
+            ],
+            cwd=ROOT, text=True, capture_output=True, timeout=180,
+        )
+        logs.append(proc.stdout)
+        if proc.stderr:
+            logs.append(proc.stderr)
+
+    # 3. 统一生成流水线步骤图
+    logs.append("[真实运行] 生成 7 张流水线阶段图")
     try:
         step_proc = subprocess.run(
             [
@@ -183,14 +212,17 @@ def run_recalculate(sid: str) -> dict:
                     f"render_pipeline_steps(Path(r'{data_dir}'), Path(r'{output_dir}'), '{config['pipeline_label']}')"
                 ),
             ],
-            cwd=ROOT, text=True, capture_output=True, timeout=180,
+            cwd=ROOT, text=True, capture_output=True, timeout=300,
         )
         logs.append(step_proc.stdout)
         if step_proc.stderr:
             logs.append(step_proc.stderr)
-    except Exception:
-        logs.append("流水线步骤图生成失败")
-    return {"ok": True, "logs": logs, "elapsed": round(time.time() - started, 2)}
+    except Exception as exc:
+        logs.append(f"流水线步骤图生成失败: {exc}")
+
+    elapsed = round(time.time() - started, 2)
+    logs.append(f"[完成] 真实流水线执行完成，共耗时 {elapsed} 秒")
+    return {"ok": True, "logs": logs, "elapsed": elapsed}
 
 
 def ensure_pipeline_steps(sid: str) -> list[str]:
@@ -243,7 +275,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path.startswith("/api/recalculate/"):
+        if parsed.path.startswith("/api/run-pipeline/"):
             sid = parsed.path.rsplit("/", 1)[-1]
             if sid not in SCENARIOS:
                 return self.error_json(404, "Unknown scenario")

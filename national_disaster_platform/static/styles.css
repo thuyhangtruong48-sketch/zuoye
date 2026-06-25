@@ -55,6 +55,14 @@ p {
   font-size: 15px;
 }
 
+.mode-explain {
+  margin-top: 4px;
+  color: #94a3b8;
+  font-size: 12px;
+  max-width: 660px;
+  line-height: 1.4;
+}
+
 .actions {
   display: flex;
   gap: 10px;
@@ -291,12 +299,41 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .route-image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.stage-overlay {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  max-width: 560px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(20, 59, 111, 0.14);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.stage-overlay strong {
+  display: block;
+  font-size: 21px;
+  color: #102033;
+  margin-bottom: 2px;
+}
+
+.stage-overlay span {
+  font-size: 13px;
+  color: #637083;
 }
 
 .pipeline-panel {
@@ -319,6 +356,7 @@ button:disabled {
   font-size: 12px;
   line-height: 1.35;
   color: #46566a;
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .pipe-step.active {
@@ -326,6 +364,21 @@ button:disabled {
   background: #edf5ff;
   color: #143b6f;
   font-weight: 800;
+}
+
+.pipe-step.clickable {
+  cursor: pointer;
+}
+
+.pipe-step.clickable:hover {
+  border-color: #668bb3;
+  background: #f0f5fa;
+}
+
+.pipe-step.played {
+  background: #effaf2;
+  border-color: #9dcca9;
+  color: #2c5c36;
 }
 
 .log-box {

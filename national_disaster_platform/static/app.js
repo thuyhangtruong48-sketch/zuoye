@@ -1,6 +1,8 @@
 let scenarios = [];
 let currentId = null;
 let running = false;
+let demoPlayedSteps = -1;
+let currentStepIndex = -1;
 
 const $ = (id) => document.getElementById(id);
 
@@ -53,6 +55,8 @@ function renderScenarioList() {
 
 async function selectScenario(id) {
   currentId = id;
+  demoPlayedSteps = -1;
+  currentStepIndex = -1;
   const scene = scenarios.find((item) => item.id === id);
   updateActiveState(id);
   renderScene(scene);
@@ -90,6 +94,7 @@ function renderScene(scene) {
   $("safeTypes").textContent = valueOrNone(safe.danger_types);
 
   renderPipeline(scene.pipeline);
+  updateStageOverlay("最终结果", "点击下方步骤可查看每一层叠加效果");
   $("logBox").textContent = [
     `当前场景：${scene.title}`,
     `历史灾害：${scene.event}`,
@@ -98,79 +103,177 @@ function renderScene(scene) {
   ].join("\n");
 }
 
+// ---------- 流水线步骤 ----------
+
+const STEP_LABELS = [
+  "选择历史灾害事件和救援起终点",
+  "抓取/加载该区域真实 OSM 道路网络",
+  "叠加历史灾害影响区并识别危险路段",
+  "叠加高德交通态势中的拥堵路段",
+  "运行 Dijkstra：距离权重得到普通最短路径",
+  "运行 Dijkstra：安全权重得到安全救援路径",
+  "输出路径对比表和可视化路线图",
+];
+
 function renderPipeline(steps, activeIndex = -1) {
   const box = $("pipeline");
   box.innerHTML = "";
+  const scene = scenarios.find((item) => item.id === currentId);
+  const stepPaths = scene ? (scene.pipelineSteps || []) : [];
+
   steps.forEach((step, index) => {
     const item = document.createElement("div");
-    item.className = `pipe-step ${index === activeIndex ? "active" : ""}`;
+    item.className = "pipe-step";
+    if (index === activeIndex) {
+      item.classList.add("active");
+    }
+    if (index <= demoPlayedSteps && demoPlayedSteps >= 0) {
+      item.classList.add("played");
+    }
     item.textContent = `${index + 1}. ${step}`;
+
+    if (stepPaths[index]) {
+      item.classList.add("clickable");
+      item.title = `点击查看：${STEP_LABELS[index] || step}`;
+      item.addEventListener("click", () => {
+        if (running) return;
+        jumpToStep(index, scene, stepPaths);
+      });
+    }
+
     box.appendChild(item);
   });
 }
 
-async function runDemo() {
-  if (running || !currentId) return;
-  running = true;
-  const scene = scenarios.find((item) => item.id === currentId);
-  $("demoBtn").disabled = true;
-  $("runBtn").disabled = true;
+function jumpToStep(index, scene, stepPaths) {
+  currentStepIndex = index;
+  const stepLabel = STEP_LABELS[index] || scene.pipeline[index] || `步骤 ${index + 1}`;
+  updateStageOverlay(`第 ${index + 1} 步`, stepLabel);
 
-  const steps = scene.pipelineSteps || [];
-  const totalSteps = steps.length || scene.pipeline.length;
-  const logs = [];
-
-  for (let i = 0; i < totalSteps; i += 1) {
-    const stepLabel = scene.pipeline[i] || `步骤 ${i + 1}`;
-    renderPipeline(scene.pipeline, i);
-    logs.push(`[${new Date().toLocaleTimeString()}] ${stepLabel}`);
-    $("logBox").textContent = logs.join("\n");
-
-    // 切换中间图片到对应步骤图
-    if (steps[i]) {
-      $("routeImage").src = `/artifact?path=${steps[i]}&t=${Date.now()}`;
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 1800));
-  }
-
-  logs.push("[完成] 已输出普通最短路径、安全路径、对比表和可视化图。");
-  $("logBox").textContent = logs.join("\n");
-  renderPipeline(scene.pipeline, -1);
-
-  // 最后恢复完整最终图
-  if (scene.routeImage) {
+  const imgPath = stepPaths[index];
+  if (imgPath) {
+    $("routeImage").src = `/artifact?path=${imgPath}&t=${Date.now()}`;
+  } else {
     $("routeImage").src = `${scene.routeImage}&t=${Date.now()}`;
   }
 
+  document.querySelectorAll(".pipe-step").forEach((el, i) => {
+    el.classList.toggle("active", i === index);
+  });
+
+  $("logBox").textContent = [
+    `[${new Date().toLocaleTimeString()}] 第 ${index + 1} 步：${stepLabel}`,
+    `（手动选择查看此步骤）`,
+  ].join("\n");
+}
+
+function updateStageOverlay(title, description) {
+  const overlay = $("stageOverlay");
+  if (!overlay) return;
+  overlay.querySelector("strong").textContent = title;
+  overlay.querySelector("span").textContent = description;
+}
+
+// ---------- 快速演示模式 ----------
+
+async function runDemo() {
+  if (running || !currentId) return;
+  running = true;
+  demoPlayedSteps = -1;
+  currentStepIndex = 0;
+
+  const scene = scenarios.find((item) => item.id === currentId);
+  const stepPaths = scene.pipelineSteps || [];
+  const totalSteps = stepPaths.length || scene.pipeline.length;
+
+  $("demoBtn").disabled = true;
+  $("runPipelineBtn").disabled = true;
+
+  const logs = [];
+  logs.push("[快速演示] 播放已由真实流水线生成的阶段结果图，适合录制演示视频。");
+
+  for (let i = 0; i < totalSteps; i += 1) {
+    currentStepIndex = i;
+    const stepLabel = STEP_LABELS[i] || scene.pipeline[i] || `步骤 ${i + 1}`;
+
+    demoPlayedSteps = i;
+    renderPipeline(scene.pipeline, i);
+
+    updateStageOverlay(`第 ${i + 1} 步`, stepLabel);
+
+    logs.push(`[${new Date().toLocaleTimeString()}] 第 ${i + 1} 步：${stepLabel}`);
+    $("logBox").textContent = logs.join("\n");
+
+    if (stepPaths[i]) {
+      $("routeImage").src = `/artifact?path=${stepPaths[i]}&t=${Date.now()}`;
+    } else {
+      $("routeImage").src = `${scene.routeImage}&t=${Date.now()}`;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+  }
+
+  demoPlayedSteps = totalSteps - 1;
+  currentStepIndex = totalSteps - 1;
+  const lastLabel = STEP_LABELS[totalSteps - 1] || scene.pipeline[totalSteps - 1] || `步骤 ${totalSteps}`;
+  updateStageOverlay(`第 ${totalSteps} 步（完成）`, lastLabel);
+
+  logs.push("[完成] 快速演示已结束，当前显示最终结果图。");
+  $("logBox").textContent = logs.join("\n");
+
   $("demoBtn").disabled = false;
-  $("runBtn").disabled = false;
+  $("runPipelineBtn").disabled = false;
   running = false;
 }
 
-async function recalculate() {
+// ---------- 真实运行流水线模式 ----------
+
+async function runRealPipeline() {
   if (running || !currentId) return;
   running = true;
   $("demoBtn").disabled = true;
-  $("runBtn").disabled = true;
-  $("logBox").textContent = "正在调用本地 Dijkstra 重新计算，请稍等...";
-  const response = await fetch(`/api/recalculate/${currentId}`, { method: "POST" });
+  $("runPipelineBtn").disabled = true;
+
+  $("logBox").textContent = "[真实运行] 开始执行本地流水线，调用真实脚本...";
+  updateStageOverlay("真实运行中", "正在执行 Dijkstra 计算和可视化生成...");
+
+  const response = await fetch(`/api/run-pipeline/${currentId}`, { method: "POST" });
   const payload = await response.json();
-  const message = payload.ok ? "重新计算完成" : "重新计算失败";
-  $("logBox").textContent = [
-    `[${message}] 用时 ${payload.elapsed || 0} 秒`,
-    ...(payload.logs || []),
-  ].join("\n");
+
+  if (!payload.ok) {
+    $("logBox").textContent = [
+      `[错误] 真实运行失败，用时 ${payload.elapsed || 0} 秒`,
+      "---",
+      ...(payload.logs || []),
+    ].join("\n");
+    $("demoBtn").disabled = false;
+    $("runPipelineBtn").disabled = false;
+    running = false;
+    return;
+  }
+
+  // 刷新当前场景数据
   const refreshed = await fetch(`/api/scenarios/${currentId}`).then((res) => res.json());
   scenarios = scenarios.map((item) => (item.id === currentId ? refreshed : item));
+  demoPlayedSteps = -1;
+  currentStepIndex = -1;
   renderScene(refreshed);
+
+  $("logBox").textContent = [
+    `[真实运行] 流水线执行完成，用时 ${payload.elapsed || 0} 秒`,
+    `[真实运行] 已刷新步骤图和最终结果图`,
+    "---",
+    ...(payload.logs || []),
+  ].join("\n");
+  updateStageOverlay("真实运行完成", "下方为重新生成的结果，可按步骤查看或播放快速演示。");
+
   $("demoBtn").disabled = false;
-  $("runBtn").disabled = false;
+  $("runPipelineBtn").disabled = false;
   running = false;
 }
 
 $("demoBtn").addEventListener("click", runDemo);
-$("runBtn").addEventListener("click", recalculate);
+$("runPipelineBtn").addEventListener("click", runRealPipeline);
 
 loadScenarios().catch((error) => {
   $("logBox").textContent = `平台加载失败：${error}`;

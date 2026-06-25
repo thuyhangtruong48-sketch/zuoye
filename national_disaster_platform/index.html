@@ -12,10 +12,11 @@
       <div>
         <h1>全国灾害响应平台</h1>
         <p>真实路网 · 历史灾害 · Dijkstra 救援路径规划</p>
+        <p class="mode-explain">快速演示：播放已由真实流水线生成的阶段图 · 真实运行：重新执行本地脚本、Dijkstra 计算和可视化生成</p>
       </div>
       <div class="actions">
-        <button id="demoBtn" class="secondary">演示流水线</button>
-        <button id="runBtn">重新计算路径</button>
+        <button id="demoBtn" class="secondary">快速演示</button>
+        <button id="runPipelineBtn">真实运行流水线</button>
       </div>
     </header>
 
@@ -55,6 +56,10 @@
           </div>
           <div class="route-image-wrap">
             <img id="routeImage" alt="救援路径规划结果图">
+            <div id="stageOverlay" class="stage-overlay">
+              <strong>最终结果</strong>
+              <span>点击下方步骤可查看每一层叠加效果</span>
+            </div>
           </div>
         </div>
 
