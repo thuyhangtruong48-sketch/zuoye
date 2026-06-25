@@ -1146,8 +1146,12 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
         img.convert("RGB").save(out_file, quality=95)
         return out_file
 
+    # ------------------------------------------------------------------
+    # 共享辅助函数（在闭包内部定义，可访问外围变量）
+    # ------------------------------------------------------------------
+
     def _draw_background_roads(img: Image.Image, d: ImageDraw.ImageDraw) -> None:
-        """步骤 1：只画背景道路（灰色底图）。"""
+        """只画背景道路（灰色底图），不含灾害区和路径。"""
         for edge in edges:
             if not should_draw_background_edge(edge, edge_count, route_keys):
                 continue
@@ -1170,18 +1174,8 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
                 line_width = 2
             draw_geo_line(d, points, project, line_color, line_width, smooth=1)
 
-    def _draw_disaster_zones_step(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
-        """步骤 2：叠加灾害影响区（在前一步基础上叠加）。"""
-        _draw_background_roads(img, _d)
-        draw_disaster_zones(img, events, project, scale)
-        # 标注灾害事件名
-        for evt in events:
-            pass
-
-    def _draw_danger_edges_step(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
-        """步骤 3+4：在道路底图 + 灾害区上标记危险边。"""
-        _draw_background_roads(img, _d)
-        draw_disaster_zones(img, events, project, scale)
+    def _draw_danger_lines(img: Image.Image) -> None:
+        """在 road network + disaster zones 之上画被影响的危险道路。"""
         danger_lines: list[tuple[list[tuple[float, float]], str | tuple[int, int, int, int], int]] = []
         for edge in edges:
             if edge.danger_type == "normal" or frozenset((edge.source, edge.target)) in route_keys:
@@ -1209,9 +1203,81 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
             danger_lines = bridge_nearby_line_endpoints(danger_lines, max_gap=30.0)
         draw_antialiased_lines(img, danger_lines)
 
+    def _draw_step1_overview(img: Image.Image, d: ImageDraw.ImageDraw) -> None:
+        # 极淡背景道路
+        for edge in edges:
+            if not should_draw_background_edge(edge, edge_count, route_keys):
+                continue
+            points = edge.polyline
+            if not points:
+                s, t = nodes[edge.source], nodes[edge.target]
+                points = [(s.lon, s.lat), (t.lon, t.lat)]
+            line_color = "#E8EDF3"
+            line_width = 1
+            draw_geo_line(d, points, project, line_color, line_width, smooth=1)
+
+        # 起点和终点
+        path = shortest_path or safe_path
+        if path:
+            draw_markers(d, nodes, path, project,
+                         scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
+
+        # 灾害事件信息框
+        if events:
+            evt = events[0]
+            box_x = WIDTH // 2 - 200
+            box_y = TOP + 40
+            info_f = load_font(22, bold=True)
+            detail_f = load_font(19)
+            lines = [
+                f"灾害类型：{evt.danger_type}",
+                f"事件名称：{evt.name}",
+                f"影响半径：{evt.radius_km} km",
+                f"数据来源：历史灾害公开资料",
+            ]
+            max_w = max(d.textlength(line, detail_f) for line in lines)
+            box_w = max_w + 36
+            box_h = 24 + 32 + len(lines) * 28
+            d.rounded_rectangle(
+                (box_x, box_y, box_x + box_w, box_y + box_h),
+                radius=14, fill="#FEFCE8", outline="#FDE68A", width=2,
+            )
+            d.text((box_x + 16, box_y + 14), "历史灾害事件", font=info_f, fill="#92400E")
+            for j, line in enumerate(lines):
+                d.text((box_x + 16, box_y + 50 + j * 26), line, font=detail_f, fill="#78716C")
+
+    def _draw_step2_roads(img: Image.Image, d: ImageDraw.ImageDraw) -> None:
+        """步骤 2：只显示真实 OSM 道路网络，不含灾害区、不含路径。"""
+        _draw_background_roads(img, d)
+        # 起点和终点
+        path = shortest_path or safe_path
+        if path:
+            draw_markers(d, nodes, path, project,
+                         scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
+
+    def _draw_step3_disaster_zones(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
+        """步骤 3：叠加历史灾害影响区并识别危险路段。"""
+        _draw_background_roads(img, _d)
+        draw_disaster_zones(img, events, project, scale)
+        _draw_danger_lines(img)
+
+    def _draw_step4_congestion(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
+        """步骤 4：保留灾害区和危险路段，叠加交通拥堵。"""
+        _draw_background_roads(img, _d)
+        draw_disaster_zones(img, events, project, scale)
+        _draw_danger_lines(img)
+        # 橙色拥堵额外标注
+        d2 = ImageDraw.Draw(img)
+        path = shortest_path or safe_path
+        if path:
+            draw_markers(d2, nodes, path, project,
+                         scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
+
     def _draw_shortest_path_step(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
-        """步骤 5：底图 + 灾害区 + 危险边 + 最短路径（蓝色）。"""
-        _draw_danger_edges_step(img, _d)
+        """步骤 5：底图 + 灾害区 + 危险边 + 蓝色最短路径，安全路径不显示。"""
+        _draw_background_roads(img, _d)
+        draw_disaster_zones(img, events, project, scale)
+        _draw_danger_lines(img)
         d2 = ImageDraw.Draw(img)
         casing = "#6F7F95" if (is_osm_scene or scenario_label in {"地震场景", "洪水场景"}) else "#FFFFFF"
         sw = 3 if (is_osm_scene or scenario_label in {"地震场景", "洪水场景"}) else 7
@@ -1224,9 +1290,23 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
         draw_markers(d2, nodes, shortest_path or safe_path, project,
                      scenario.get("start_label", "起点"), scenario.get("target_label", "终点"))
 
+        # 距离信息
+        dist = results.get("distance", {})
+        dist_val = dist.get("total_distance", "-")
+        panel_x = WIDTH - RIGHT - 290
+        panel_y = TOP + 20
+        info_f = load_font(20)
+        d2.rounded_rectangle(
+            (panel_x, panel_y, panel_x + 260, panel_y + 50),
+            radius=10, fill="#EFF6FF", outline="#93C5FD", width=2,
+        )
+        d2.text((panel_x + 14, panel_y + 12), f"Dijkstra 最短距离：{dist_val} km", font=info_f, fill="#1E40AF")
+
     def _draw_safe_path_step(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
         """步骤 6：只突出绿色安全路径，蓝色最短路径用淡虚线参考。"""
-        _draw_danger_edges_step(img, _d)
+        _draw_background_roads(img, _d)
+        draw_disaster_zones(img, events, project, scale)
+        _draw_danger_lines(img)
         d2 = ImageDraw.Draw(img)
         is_attached = is_osm_scene or scenario_label in {"地震场景", "洪水场景"}
 
@@ -1280,7 +1360,9 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
 
     def _draw_final_overview(img: Image.Image, _d: ImageDraw.ImageDraw) -> None:
         """步骤 7：最终完整对比图，含双路径 + 图例 + 对比数据。"""
-        _draw_danger_edges_step(img, _d)
+        _draw_background_roads(img, _d)
+        draw_disaster_zones(img, events, project, scale)
+        _draw_danger_lines(img)
         d2 = ImageDraw.Draw(img)
         is_attached = is_osm_scene or scenario_label in {"地震场景", "洪水场景"}
         casing = "#6F7F95" if is_attached else "#FFFFFF"
@@ -1336,10 +1418,10 @@ def render_pipeline_steps(data_dir: Path, output_dir: Path, scenario_label: str)
         )
 
     steps: list[tuple[str, Callable[[Image.Image, ImageDraw.ImageDraw], None]]] = [
-        ("加载道路底图", _draw_background_roads),
-        ("叠加灾害影响区", _draw_disaster_zones_step),
-        ("读取交通态势数据", _draw_danger_edges_step),
-        ("标记危险/拥堵路段", _draw_danger_edges_step),
+        ("选择灾害事件和起终点", _draw_step1_overview),
+        ("加载真实道路网络", _draw_step2_roads),
+        ("叠加灾害影响区", _draw_step3_disaster_zones),
+        ("标记危险和拥堵路段", _draw_step4_congestion),
         ("Dijkstra · 普通最短路径", _draw_shortest_path_step),
         ("Dijkstra · 安全救援路径", _draw_safe_path_step),
         ("路径对比与最终结果", _draw_final_overview),
