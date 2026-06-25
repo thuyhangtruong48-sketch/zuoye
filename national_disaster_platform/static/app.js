@@ -145,7 +145,7 @@ function renderPipeline(steps, activeIndex = -1) {
   });
 }
 
-function jumpToStep(index, scene, stepPaths) {
+function jumpToStep(index, scene, stepPaths, options = {}) {
   currentStepIndex = index;
   const stepLabel = STEP_LABELS[index] || scene.pipeline[index] || `步骤 ${index + 1}`;
   updateStageOverlay(`第 ${index + 1} 步`, stepLabel);
@@ -161,10 +161,12 @@ function jumpToStep(index, scene, stepPaths) {
     el.classList.toggle("active", i === index);
   });
 
-  $("logBox").textContent = [
-    `[${new Date().toLocaleTimeString()}] 第 ${index + 1} 步：${stepLabel}`,
-    `（手动选择查看此步骤）`,
-  ].join("\n");
+  if (!options.preserveLog) {
+    $("logBox").textContent = [
+      `[${new Date().toLocaleTimeString()}] 第 ${index + 1} 步：${stepLabel}`,
+      `（手动选择查看此步骤）`,
+    ].join("\n");
+  }
 }
 
 function updateStageOverlay(title, description) {
@@ -234,48 +236,59 @@ async function runRealPipeline() {
   $("demoBtn").disabled = true;
   $("runPipelineBtn").disabled = true;
 
-  $("logBox").textContent = "[真实运行] 开始执行本地流水线，调用真实脚本...";
-  updateStageOverlay("真实运行中", "正在执行 Dijkstra 计算和可视化生成...");
+  try {
+    $("logBox").textContent = "[真实运行] 开始执行本地流水线，调用真实脚本...";
+    updateStageOverlay("真实运行中", "正在执行 Dijkstra 计算和可视化生成...");
 
-  const response = await fetch(`/api/run-pipeline/${currentId}`, { method: "POST" });
-  const payload = await response.json();
+    const response = await fetch(`/api/run-pipeline/${currentId}`, { method: "POST" });
+    let payload;
+    try {
+      payload = await response.json();
+    } catch (parseErr) {
+      $("logBox").textContent = `[错误] 后端返回非 JSON 数据：${parseErr.message || parseErr}`;
+      return;
+    }
 
-  if (!payload.ok) {
+    if (!payload.ok) {
+      $("logBox").textContent = [
+        `[错误] 真实运行失败，用时 ${payload.elapsed || 0} 秒`,
+        "---",
+        ...(payload.logs || []),
+      ].join("\n");
+      return;
+    }
+
+    // 刷新当前场景数据
+    const refreshed = await fetch(`/api/scenarios/${currentId}`).then((res) => res.json());
+    scenarios = scenarios.map((item) => (item.id === currentId ? refreshed : item));
+    demoPlayedSteps = 6;
+    renderPipeline(refreshed.pipeline, 6);
+
     $("logBox").textContent = [
-      `[错误] 真实运行失败，用时 ${payload.elapsed || 0} 秒`,
+      `[真实运行] 流水线执行完成，用时 ${payload.elapsed || 0} 秒`,
+      `[真实运行] 已刷新步骤图和最终结果图`,
       "---",
       ...(payload.logs || []),
     ].join("\n");
+
+    // 直接显示第 7 步图片，但不覆盖日志
+    const stepPaths = refreshed.pipelineSteps || [];
+    if (stepPaths[6]) {
+      jumpToStep(6, refreshed, stepPaths, { preserveLog: true });
+    } else {
+      renderScene(refreshed);
+    }
+  } catch (err) {
+    $("logBox").textContent = [
+      `[错误] 真实运行异常：${err.message || err}`,
+      "---",
+      "请检查后端是否正在运行，或稍后重试。",
+    ].join("\n");
+  } finally {
     $("demoBtn").disabled = false;
     $("runPipelineBtn").disabled = false;
     running = false;
-    return;
   }
-
-  // 刷新当前场景数据
-  const refreshed = await fetch(`/api/scenarios/${currentId}`).then((res) => res.json());
-  scenarios = scenarios.map((item) => (item.id === currentId ? refreshed : item));
-  demoPlayedSteps = 6;
-  renderPipeline(refreshed.pipeline, 6);
-
-  $("logBox").textContent = [
-    `[真实运行] 流水线执行完成，用时 ${payload.elapsed || 0} 秒`,
-    `[真实运行] 已刷新步骤图和最终结果图`,
-    "---",
-    ...(payload.logs || []),
-  ].join("\n");
-
-  // 直接显示第 7 步图片
-  const stepPaths = refreshed.pipelineSteps || [];
-  if (stepPaths[6]) {
-    jumpToStep(6, refreshed, stepPaths);
-  } else {
-    renderScene(refreshed);
-  }
-
-  $("demoBtn").disabled = false;
-  $("runPipelineBtn").disabled = false;
-  running = false;
 }
 
 $("demoBtn").addEventListener("click", runDemo);

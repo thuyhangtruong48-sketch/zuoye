@@ -364,7 +364,8 @@ button:disabled {
   transition: border-color 0.2s, background 0.2s;
 }
 
-.pipe-step.active {
+.pipe-step.active,
+.pipe-step.active.played {
   border-color: #143b6f;
   background: #edf5ff;
   color: #143b6f;

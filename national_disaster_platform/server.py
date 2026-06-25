@@ -140,11 +140,12 @@ def quote_rel(path: Path) -> str:
 
 
 def run_recalculate(sid: str) -> dict:
-    """真实运行模式：调用本地脚本重新执行 Dijkstra 和可视化。"""
+    """真实运行模式：调用本地脚本重新执行 Dijkstra 和可视化。
+    统一使用网页场景的 data_dir 和 output_dir，不输出到 demo_* 目录。"""
     config = SCENARIOS[sid]
     data_dir = config["data_dir"]
     output_dir = config["output_dir"]
-    pipeline_config = config.get("pipeline_config")
+    pipeline_label = config.get("pipeline_label", config["title"])
     python = ROOT / ".venv" / "Scripts" / "python.exe"
     if not python.exists():
         python = Path(sys.executable)
@@ -152,56 +153,42 @@ def run_recalculate(sid: str) -> dict:
     started = time.time()
     logs: list[str] = []
 
-    # 如果有完整流水线配置，走 run_osm_disaster_pipeline.py --skip-fetch
-    if pipeline_config and pipeline_config.exists():
-        logs.append("[真实运行] 检测到完整流水线配置，使用 --skip-fetch 模式")
-        proc = subprocess.run(
-            [
-                str(python), str(ROOT / "tools" / "run_osm_disaster_pipeline.py"),
-                "--config", str(pipeline_config),
-                "--skip-fetch", "--overwrite",
-            ],
-            cwd=ROOT, text=True, capture_output=True, timeout=300,
-        )
-        logs.append(proc.stdout)
-        if proc.stderr:
-            logs.append(proc.stderr)
-        if proc.returncode != 0:
-            return {"ok": False, "logs": logs, "elapsed": round(time.time() - started, 2)}
-    else:
-        # 没有完整配置的场景：至少重新跑 Dijkstra
-        logs.append("[真实运行] 无流水线配置，直接运行 Dijkstra 和可视化")
-        # 1. Dijkstra
-        proc = subprocess.run(
-            [
-                str(python), str(ROOT / "src" / "rescue_planner.py"),
-                "--data-dir", str(data_dir), "--output-dir", str(output_dir),
-            ],
-            cwd=ROOT, text=True, capture_output=True, timeout=180,
-        )
-        logs.append(proc.stdout)
-        if proc.stderr:
-            logs.append(proc.stderr)
-        if proc.returncode != 0:
-            return {"ok": False, "logs": logs, "elapsed": round(time.time() - started, 2)}
-        # 2. 渲染完整图
-        proc = subprocess.run(
-            [
-                str(python), "-c",
-                (
-                    "from pathlib import Path; "
-                    "from tools.create_abstract_route_maps import render_scene; "
-                    f"render_scene(Path(r'{data_dir}'), Path(r'{output_dir}'), '{config['title']}')"
-                ),
-            ],
-            cwd=ROOT, text=True, capture_output=True, timeout=180,
-        )
-        logs.append(proc.stdout)
-        if proc.stderr:
-            logs.append(proc.stderr)
+    # 步骤 1: 运行 Dijkstra 路径规划
+    logs.append("[真实运行] 步骤 1/3: 运行 Dijkstra 路径规划")
+    proc = subprocess.run(
+        [
+            str(python), str(ROOT / "src" / "rescue_planner.py"),
+            "--data-dir", str(data_dir), "--output-dir", str(output_dir),
+        ],
+        cwd=ROOT, text=True, capture_output=True, timeout=180,
+    )
+    logs.append(proc.stdout)
+    if proc.stderr:
+        logs.append(proc.stderr)
+    if proc.returncode != 0:
+        return {"ok": False, "logs": logs, "elapsed": round(time.time() - started, 2)}
 
-    # 3. 统一生成流水线步骤图
-    logs.append("[真实运行] 生成 7 张流水线阶段图")
+    # 步骤 2: 渲染完整路线对比图
+    logs.append("[真实运行] 步骤 2/3: 渲染完整路线对比图")
+    proc = subprocess.run(
+        [
+            str(python), "-c",
+            (
+                "from pathlib import Path; "
+                "from tools.create_abstract_route_maps import render_scene; "
+                f"render_scene(Path(r'{data_dir}'), Path(r'{output_dir}'), '{config['title']}')"
+            ),
+        ],
+        cwd=ROOT, text=True, capture_output=True, timeout=180,
+    )
+    logs.append(proc.stdout)
+    if proc.stderr:
+        logs.append(proc.stderr)
+    if proc.returncode != 0:
+        return {"ok": False, "logs": logs, "elapsed": round(time.time() - started, 2)}
+
+    # 步骤 3: 生成 7 张流水线步骤图
+    logs.append("[真实运行] 步骤 3/3: 生成 7 张流水线阶段图")
     try:
         step_proc = subprocess.run(
             [
@@ -209,7 +196,7 @@ def run_recalculate(sid: str) -> dict:
                 (
                     "from pathlib import Path; "
                     "from tools.create_abstract_route_maps import render_pipeline_steps; "
-                    f"render_pipeline_steps(Path(r'{data_dir}'), Path(r'{output_dir}'), '{config['pipeline_label']}')"
+                    f"render_pipeline_steps(Path(r'{data_dir}'), Path(r'{output_dir}'), '{pipeline_label}')"
                 ),
             ],
             cwd=ROOT, text=True, capture_output=True, timeout=300,
